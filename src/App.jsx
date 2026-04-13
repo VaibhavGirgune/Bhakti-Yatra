@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Yatra from './pages/Yatra';
+import YatraRoute from './pages/YatraRoute';
 import PlaceDetails from './pages/PlaceDetails';
 import Bus from './pages/Bus';
 import LiveLocation from './pages/LiveLocation';
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/yatra" element={<Yatra />} />
+          <Route path="/yatra-route" element={<YatraRoute />} />
           <Route path="/place/:name" element={<PlaceDetails />} />
           <Route path="/bus" element={<Bus />} />
           <Route path="/location" element={<LiveLocation />} />

@@ -8,17 +8,24 @@ import {
 } from 'lucide-react';
 import { homeSliderImages, tours, contactDetails } from '../data/data';
 
+// Correct display order for route section
+const stateOrder = ['मध्यप्रदेश', 'उत्तरप्रदेश', 'नेपाळ', 'बिहार', 'पश्चिम बंगाल', 'ओडिशा', 'महाराष्ट्र'];
+const sortedTours = [
+  ...stateOrder.map(name => tours.find(t => t.state === name)).filter(Boolean),
+  ...tours.filter(t => !stateOrder.includes(t.state)),
+];
+
 const featuredPlaces = [
   'इलाहाबाद (प्रयागराज)',
   'अयोध्या',
   'काशी (वाराणसी)',
-  'उज्जैन',
+  'जगन्नाथपुरी',
   'काठमांडू (पशुपतिनाथ)',
 ];
 
 const stats = [
   { value: "७", label: "पवित्र राज्ये", Icon: Map },
-  { value: "20+", label: "तीर्थक्षेत्रे", Icon: Landmark },
+  { value: "15+", label: "तीर्थक्षेत्रे", Icon: Landmark },
   { value: "५०", label: "आरामदायी सीट्स", Icon: Bus },
   { value: "१००%", label: "सुरक्षित प्रवास", Icon: ShieldCheck },
 ];
@@ -94,7 +101,7 @@ export default function Home() {
 
           <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto leading-relaxed">
             पवित्र तीर्थक्षेत्रांची सुरक्षित, आरामदायी आणि संस्मरणीय यात्रा —
-            <span className="text-orange-300 font-extrabold"> ७ राज्ये, 20+ ठिकाणे</span>
+            <span className="text-orange-300 font-extrabold"> ७ राज्ये, 15+ ठिकाणे</span>
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -154,22 +161,22 @@ export default function Home() {
               आमचा पवित्र यात्रा मार्ग
             </h2>
             <p className="text-gray-500 max-w-xl mx-auto text-base font-semibold">
-              ७ राज्यांमधील 20+ पवित्र तीर्थक्षेत्रांना एकाच यात्रेत भेट द्या
+              ७ राज्यांमधील 15+ पवित्र तीर्थक्षेत्रांना एकाच यात्रेत भेट द्या
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
-            {tours.map((tour, i) => (
+          {/* Row 1 — 4 cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-5">
+            {sortedTours.slice(0, 4).map((tour, i) => (
               <motion.div
                 key={tour.state}
                 {...fadeUp(i * 0.1)}
                 className="relative bg-white border-2 border-orange-100 hover:border-orange-400 rounded-2xl p-6 text-center shadow-sm hover:shadow-xl transition-all duration-300 group"
               >
-                {/* step number */}
                 <div className="w-11 h-11 bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-full flex items-center justify-center font-extrabold text-lg mx-auto mb-4 shadow-md group-hover:scale-110 transition-transform">
                   {i + 1}
                 </div>
-                <h3 className="font-extrabold text-gray-800 text-base mb-1">{tour.state}</h3>
+                <h3 className="font-extrabold text-gray-800 text-base mb-1 whitespace-nowrap">{tour.state}</h3>
                 <p className="text-orange-500 text-sm font-bold mb-3">
                   {tour.places.length} ठिकाणे
                 </p>
@@ -186,10 +193,38 @@ export default function Home() {
                     </li>
                   )}
                 </ul>
-                {/* connector line (desktop) */}
-                {i < tours.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-orange-200 z-10" />
-                )}
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Row 2 — 3 cards centered */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:w-3/4 lg:mx-auto">
+            {sortedTours.slice(4).map((tour, i) => (
+              <motion.div
+                key={tour.state}
+                {...fadeUp((i + 4) * 0.1)}
+                className="relative bg-white border-2 border-orange-100 hover:border-orange-400 rounded-2xl p-6 text-center shadow-sm hover:shadow-xl transition-all duration-300 group"
+              >
+                <div className="w-11 h-11 bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-full flex items-center justify-center font-extrabold text-lg mx-auto mb-4 shadow-md group-hover:scale-110 transition-transform">
+                  {i + 5}
+                </div>
+                <h3 className="font-extrabold text-gray-800 text-base mb-1 whitespace-nowrap">{tour.state}</h3>
+                <p className="text-orange-500 text-sm font-bold mb-3">
+                  {tour.places.length} ठिकाणे
+                </p>
+                <ul className="space-y-1.5">
+                  {tour.places.slice(0, 3).map(p => (
+                    <li key={p.name} className="text-gray-600 text-xs font-semibold flex items-center gap-1.5 justify-center">
+                      <span className="w-1 h-1 rounded-full bg-orange-400 inline-block flex-shrink-0" />
+                      {p.name}
+                    </li>
+                  ))}
+                  {tour.places.length > 3 && (
+                    <li className="text-orange-400 text-xs font-semibold mt-1">
+                      + {tour.places.length - 3} अधिक
+                    </li>
+                  )}
+                </ul>
               </motion.div>
             ))}
           </div>
@@ -283,6 +318,71 @@ export default function Home() {
                 </div>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Travel Facilities Section ── */}
+      <section className="py-10 px-4 md:px-8 bg-orange-50">
+        <div className="max-w-5xl mx-auto">
+          <motion.div {...fadeUp()} className="text-center mb-10">
+            <span className="inline-block bg-orange-100 text-orange-600 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4">
+              सुविधा
+            </span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
+              प्रवासात मिळणाऱ्या सुविधा
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            {/* Food & Travel */}
+            <motion.div {...fadeUp(0.1)} className="bg-white rounded-2xl p-6 shadow-sm border border-orange-100">
+              <h3 className="text-lg font-extrabold text-orange-600 mb-4 flex items-center gap-2">
+                🍽️ जेवण व नाश्ता
+              </h3>
+              <ul className="space-y-2.5">
+                {[
+                  'दोन वेळचे शुद्ध शाकाहारी जेवण',
+                  'गरजेनुसार नाश्ता',
+                  'सकाळी नाश्ता',
+                  'पिण्याचे शुद्ध पाणी (बाटली)',
+                ].map(item => (
+                  <li key={item} className="flex items-center gap-2 text-gray-700 text-sm font-semibold">
+                    <span className="text-green-500 font-bold">✔</span> {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* Bus & Comfort */}
+            <motion.div {...fadeUp(0.2)} className="bg-white rounded-2xl p-6 shadow-sm border border-orange-100">
+              <h3 className="text-lg font-extrabold text-orange-600 mb-4 flex items-center gap-2">
+                🚌 बस व प्रवास सुविधा
+              </h3>
+              <ul className="space-y-2.5">
+                {[
+                  'संपूर्ण प्रवास स्लीपर कोच AC बसने',
+                  'आरामदायी बेड व्यवस्था',
+                  'मोबाइल चार्जिंग पॉइंट',
+                  'अनुभवी ड्रायव्हर',
+                  'सुरक्षित आणि आरामदायी प्रवास',
+                ].map(item => (
+                  <li key={item} className="flex items-center gap-2 text-gray-700 text-sm font-semibold">
+                    <span className="text-green-500 font-bold">✔</span> {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* Important Note */}
+            <motion.div {...fadeUp(0.4)} className="bg-amber-50 rounded-2xl p-6 shadow-sm border border-amber-200 md:col-span-2">
+              <h3 className="text-xl font-extrabold text-amber-700 mb-3 flex items-center gap-2">
+                📌 महत्त्वाची सूचना
+              </h3>
+              <p className="text-gray-700 text-base font-semibold leading-relaxed">
+                प्रवासादरम्यान होणारे सर्व सामान्य खर्च (उदा. वाहन खर्च, राहण्याची व्यवस्था, नाश्ता, जेवण व इतर आवश्यक खर्च) हे शेवटी सर्व यात्रेकरूंमध्ये <span className="text-amber-700 font-extrabold">समान प्रमाणात विभागले जातील.</span>
+              </p>
+            </motion.div>
           </div>
         </div>
       </section>

@@ -3,6 +3,13 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { tours } from '../data/data';
 
+// Custom order: MP, UP, Nepal, Bihar, West Bengal, Odisha, Maharashtra
+const stateOrder = ['मध्यप्रदेश', 'उत्तरप्रदेश', 'नेपाळ', 'बिहार', 'पश्चिम बंगाल', 'ओडिशा', 'महाराष्ट्र'];
+const sortedTours = [
+  ...stateOrder.map(name => tours.find(t => t.state === name)).filter(Boolean),
+  ...tours.filter(t => !stateOrder.includes(t.state)),
+];
+
 export default function Yatra() {
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4 sm:px-6 lg:px-8">
@@ -15,7 +22,7 @@ export default function Yatra() {
         </div>
 
         <div className="space-y-10">
-          {tours.map((tour, stateIndex) => (
+          {sortedTours.map((tour, stateIndex) => (
             <motion.div 
               key={tour.state}
               initial={{ opacity: 0, y: 20 }}
