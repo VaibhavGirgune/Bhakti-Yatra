@@ -1,89 +1,81 @@
-import { motion } from 'framer-motion';
-import { contactDetails } from '../data/data';
-import { Phone, MessageCircle, Clock, MapPin } from 'lucide-react';
+import { motion } from "framer-motion";
+import { contactDetails } from "../data/data";
+import { Phone, MessageCircle } from "lucide-react";
 
 export default function Contact() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-white flex items-center justify-center px-4 py-12">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-md"
-      >
-        {/* Card */}
-        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-orange-100">
+    <div className="sm:h-[calc(100vh-64px)] flex flex-col sm:flex-row sm:overflow-hidden">
 
-          {/* Banner */}
-          <div className="relative bg-gradient-to-br from-orange-500 to-amber-400 px-6 pt-10 pb-14 text-center overflow-hidden">
-            {/* decorative circles */}
-            <div className="absolute -top-8 -left-8 w-32 h-32 bg-white/10 rounded-full" />
-            <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-white/10 rounded-full" />
-            <div className="absolute top-4 right-10 w-10 h-10 bg-white/10 rounded-full" />
+      {/* Left — Full Image */}
+      <div className="relative sm:w-1/2 h-[45vh] sm:h-full overflow-hidden">
+        <img
+          src="/download.jpg"
+          alt="श्री दत्त"
+          className="w-full h-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-            <div className="relative">
-              <div className="w-20 h-20 bg-white/25 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg border border-white/30">
-                <span className="text-4xl">🛕</span>
-              </div>
-              <h1 className="text-white font-extrabold text-2xl tracking-tight">{contactDetails.name}</h1>
-              <p className="text-orange-100 text-base mt-1 font-extrabold">महेश वाघमारे महाराज</p>
-            </div>
+        {/* Name at bottom of image */}
+        <div className="absolute bottom-0 left-0 right-0 p-8 text-center">
+          <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-6 py-4">
+            <p className="text-orange-300 text-xs font-bold tracking-widest uppercase mb-1">यात्रा संस्थापक</p>
+            <h2 className="text-white font-extrabold text-2xl leading-tight">श्री महेश वाघमारे</h2>
+            <p className="text-orange-200 font-bold text-base mt-0.5">महाराज</p>
           </div>
+        </div>
+      </div>
 
-          {/* Overlap badge */}
-          <div className="flex justify-center -mt-5 relative z-10">
-            <span className="bg-white border border-orange-200 text-orange-600 text-xs font-bold px-4 py-1.5 rounded-full shadow-md">
-              📞 संपर्क करा
-            </span>
-          </div>
+      {/* Right — Contact */}
+      <div className="sm:w-1/2 flex flex-col justify-center bg-gradient-to-br from-orange-50 to-amber-50 px-6 py-6 sm:px-14 gap-5 sm:flex-1">
 
-          {/* Buttons */}
-          <div className="px-6 pt-5 pb-6 space-y-3">
-            <a
-              href={`tel:${contactDetails.phone}`}
-              className="flex items-center gap-3 w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 active:scale-[0.98] text-white font-bold py-4 px-5 rounded-2xl transition-all shadow-md shadow-blue-200"
-            >
-              <div className="w-8 h-8 bg-white/20 rounded-xl flex items-center justify-center shrink-0">
-                <Phone size={16} />
-              </div>
-              <div className="flex-1">
-                <p className="text-[11px] text-blue-100 font-medium leading-none mb-0.5">फोन करा</p>
-                <p className="text-base font-extrabold tracking-wide">{contactDetails.phone}</p>
-              </div>
-            </a>
-
-            <a
-              href={contactDetails.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 active:scale-[0.98] text-white font-bold py-4 px-5 rounded-2xl transition-all shadow-md shadow-green-200"
-            >
-              <div className="w-8 h-8 bg-white/20 rounded-xl flex items-center justify-center shrink-0">
-                <MessageCircle size={16} />
-              </div>
-              <div className="flex-1">
-                <p className="text-[11px] text-green-100 font-medium leading-none mb-0.5">WhatsApp</p>
-                <p className="text-base font-extrabold">मेसेज करा</p>
-              </div>
-            </a>
-          </div>
-
+        {/* Header */}
+        <div>
+          <span className="inline-block bg-orange-100 text-orange-600 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4">
+            📞 संपर्क करा
+          </span>
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-gray-900 leading-tight">
+            आम्हाला <span className="text-orange-500">संपर्क</span> करा
+          </h1>
+          <p className="text-gray-500 text-sm font-semibold mt-2 leading-relaxed">
+            यात्रेसाठी बुकिंग किंवा माहितीसाठी खाली दिलेल्या नंबरवर संपर्क करा.
+          </p>
         </div>
 
-        {/* Info below card */}
-        {/* <div className="mt-4 bg-white rounded-2xl border border-orange-100 shadow-sm divide-y divide-orange-50">
-         
-          <div className="flex items-center gap-3 px-4 py-3">
-            <MapPin size={15} className="text-orange-400 shrink-0" />
-            <div>
-              <p className="text-[10px] text-orange-400 font-semibold uppercase tracking-wide">स्थान</p>
-              <p className="text-sm font-semibold text-gray-700">राहुरी, अहमदनगर, महाराष्ट्र</p>
-            </div>
+        {/* Call */}
+        <motion.a
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.97 }}
+          href={`tel:${contactDetails.phone}`}
+          className="flex items-center gap-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-4 sm:py-5 px-5 sm:px-7 rounded-2xl shadow-xl shadow-blue-200 hover:shadow-blue-300 transition-all"
+        >
+          <div className="w-11 h-11 sm:w-14 sm:h-14 bg-white/20 rounded-xl flex items-center justify-center shrink-0">
+            <Phone size={22} />
           </div>
-        </div> */}
+          <div>
+            <p className="text-blue-100 text-xs font-semibold mb-0.5">फोन क्रमांक (श्री महेश वाघमारे महाराज)</p>
+            <p className="text-xl sm:text-3xl font-extrabold tracking-wider">{contactDetails.phone}</p>
+          </div>
+        </motion.a>
 
+        {/* WhatsApp */}
+        <motion.a
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.97 }}
+          href={contactDetails.whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white py-4 sm:py-5 px-5 sm:px-7 rounded-2xl shadow-xl shadow-green-200 hover:shadow-green-300 transition-all"
+        >
+          <div className="w-11 h-11 sm:w-14 sm:h-14 bg-white/20 rounded-xl flex items-center justify-center shrink-0">
+            <MessageCircle size={22} />
+          </div>
+          <div>
+            <p className="text-green-100 text-xs font-semibold mb-0.5">WhatsApp वर संपर्क करा</p>
+            <p className="text-xl sm:text-3xl font-extrabold">मेसेज करा</p>
+          </div>
+        </motion.a>
 
-      </motion.div>
+      </div>
     </div>
   );
 }

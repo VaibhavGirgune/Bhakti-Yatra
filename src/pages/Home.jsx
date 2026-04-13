@@ -72,16 +72,20 @@ export default function Home() {
     <div className="flex flex-col min-h-screen bg-white">
 
       {/* ── Hero ── */}
-      <section className="relative h-[88vh] min-h-[520px] w-full flex items-center justify-center overflow-hidden">
+      <section className="relative h-[92vh] min-h-[600px] w-full flex items-center justify-center overflow-hidden bg-black">
+        {/* Blurred bg fill for sides */}
         <img
-          src={homeSliderImages[0]}
+          src="/download.jpg"
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover object-center scale-110"
+          style={{ filter: 'blur(20px) brightness(0.25)' }}
+        />
+        {/* Main sharp centered image */}
+        <img
+          src="/download.jpg"
           alt="Yatra Hero"
-          onError={(e) => {
-            e.target.onerror = null;
-            e.target.src = "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1400&h=800&fit=crop";
-          }}
-          className="absolute inset-0 w-full h-full object-cover scale-105"
-          style={{ filter: 'brightness(0.45)' }}
+          className="absolute top-0 bottom-0 h-full w-auto mx-auto"
+          style={{ left: '50%', transform: 'translateX(-50%)', filter: 'brightness(0.6)' }}
         />
         {/* gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/80" />
@@ -90,7 +94,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative z-10 text-center px-6 max-w-4xl mx-auto"
+          className="z-10 text-center px-6 max-w-4xl mx-auto w-full absolute bottom-16"
         >
           {/* badge */}
        
@@ -164,6 +168,9 @@ export default function Home() {
               ७ राज्यांमधील 15+ पवित्र तीर्थक्षेत्रांना एकाच यात्रेत भेट द्या
             </p>
           </motion.div>
+
+          {/* KM Stats */}
+       
 
           {/* Row 1 — 4 cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-5">
