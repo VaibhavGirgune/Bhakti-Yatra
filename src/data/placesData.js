@@ -181,55 +181,50 @@ export const placesById = {
   },
 };
 
-/** बस व गॅलरी — ऑनलाइन प्रतिमा (Unsplash) */
+/** बस व गॅलरी — लोकल बस फोटो */
 export const busGalleryImages = [
   {
     id: 'b1',
-    src: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=900&q=80',
+    src: '/bus1.jpeg',
     alt: 'प्रवासी बस',
   },
   {
     id: 'b2',
-    src: 'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=900&q=80',
+    src: '/bus2.jpeg',
     alt: 'रात्रीची बस',
   },
   {
     id: 'b3',
-    src: 'https://images.unsplash.com/photo-1557223562-6c877ef04b4d?w=900&q=80',
+    src: '/bus3.jpeg',
     alt: 'बस आतून',
+  },
+  {
+    id: 'b4',
+    src: '/bus4.jpeg',
+    alt: 'बस सुविधा',
   },
 ];
 
 export const tourGalleryImages = [
   {
     id: 't1',
-    src: 'https://images.unsplash.com/photo-1547036961-45d61a8672d4?w=600&q=80',
-    alt: 'मंदिर',
+    src: '/bus1.jpeg',
+    alt: 'यात्रा बस',
   },
   {
     id: 't2',
-    src: 'https://images.unsplash.com/photo-1561361053-72852cffe0d6?w=600&q=80',
-    alt: 'घाट',
+    src: '/bus2.jpeg',
+    alt: 'यात्रा प्रवास',
   },
   {
     id: 't3',
-    src: 'https://images.unsplash.com/photo-1507692049960-70d95c85b5ca?w=600&q=80',
-    alt: 'स्तूप',
+    src: '/bus3.jpeg',
+    alt: 'बस सुविधा',
   },
   {
     id: 't4',
-    src: 'https://images.unsplash.com/photo-1582517867036-de97caa6ed8a?w=600&q=80',
-    alt: 'यात्रा',
-  },
-  {
-    id: 't5',
-    src: 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=600&q=80',
-    alt: 'देवळ',
-  },
-  {
-    id: 't6',
-    src: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&q=80',
-    alt: 'प्रार्थना',
+    src: '/bus4.jpeg',
+    alt: 'आरामदायी प्रवास',
   },
 ];
 

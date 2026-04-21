@@ -29,7 +29,54 @@ const STATE_CFG = {
   'पश्चिम बंगाल': { color: '#0891b2', light: '#cffafe', label: 'WB' },
 };
 
-const STATE_ORDER = ['मध्यप्रदेश', 'उत्तरप्रदेश', 'नेपाळ', 'बिहार', 'पश्चिम बंगाल', 'ओडिशा', 'महाराष्ट्र'];
+// Optimised route order: Rahuri → MP → UP → Nepal → Bihar → WB → Odisha → Shegaon → Rahuri
+const ROUTE_ORDER = [
+  'ओंकारेश्वर',
+  'उज्जैन',
+  'चित्रकूट',
+  'गुप्तगोदावरी',
+  'सती अनुसया',
+  'इलाहाबाद (प्रयागराज)',
+  'काशी (वाराणसी)',
+  'अयोध्या',
+  'गोरखपूर',
+  'मनकामना देवी',
+  'काठमांडू (पशुपतिनाथ)',
+  'जनकपूर',
+  'गया',
+  'बोधगया',
+  'कोलकाता',
+  'गंगासागर',
+  'जगन्नाथपुरी',
+  'भुवनेश्वर',
+  'शेगाव',
+];
+
+// Approx road distances (km) between consecutive stops
+const DISTANCES = {
+  'राहुरी→ओंकारेश्वर': 450,
+  'ओंकारेश्वर→उज्जैन': 140,
+  'उज्जैन→चित्रकूट': 480,
+  'चित्रकूट→गुप्तगोदावरी': 20,
+  'गुप्तगोदावरी→सती अनुसया': 15,
+  'सती अनुसया→इलाहाबाद (प्रयागराज)': 200,
+  'इलाहाबाद (प्रयागराज)→काशी (वाराणसी)': 125,
+  'काशी (वाराणसी)→अयोध्या': 200,
+  'अयोध्या→गोरखपूर': 140,
+  'गोरखपूर→मनकामना देवी': 280,
+  'मनकामना देवी→काठमांडू (पशुपतिनाथ)': 120,
+  'काठमांडू (पशुपतिनाथ)→जनकपूर': 230,
+  'जनकपूर→गया': 280,
+  'गया→बोधगया': 13,
+  'बोधगया→कोलकाता': 480,
+  'कोलकाता→गंगासागर': 100,
+  'गंगासागर→जगन्नाथपुरी': 480,
+  'जगन्नाथपुरी→भुवनेश्वर': 65,
+  'भुवनेश्वर→शेगाव': 980,
+  'शेगाव→राहुरी': 390,
+};
+
+const STATE_ORDER = ['महाराष्ट्र', 'मध्यप्रदेश', 'उत्तरप्रदेश', 'नेपाळ', 'बिहार', 'पश्चिम बंगाल', 'ओडिशा'];
 
 const MAP_TILES = {
   standard:  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -115,11 +162,14 @@ export default function LiveLocation() {
   const allPlaces = tours.flatMap(t =>
     t.places.filter(p => p.lat && p.lng).map(p => ({ ...p, state: t.state }))
   );
-  const ordered = STATE_ORDER.flatMap(s => allPlaces.filter(p => p.state === s));
+  // Sort by optimised route order
+  const ordered = ROUTE_ORDER
+    .map(name => allPlaces.find(p => p.name === name))
+    .filter(Boolean);
 
-  // Highway waypoints to keep route on land (avoid sea)
+  // Waypoints to keep route on land (avoid sea between Gangasagar and Puri)
   const WAYPOINTS = {
-    'गंगासागर→जगन्नाथपुरी': [[22.33, 87.32], [21.48, 86.92]], // via Kharagpur → Balasore → NH16
+    'गंगासागर→जगन्नाथपुरी': [[22.33, 87.32], [21.48, 86.92]],
   };
 
   const routePoints = (() => {
@@ -249,18 +299,25 @@ export default function LiveLocation() {
                   {filtered.map((place, i) => {
                     const cfg = STATE_CFG[place.state];
                     const isActive = selected?.name === place.name;
+                    const routeIdx = ordered.findIndex(p => p.name === place.name);
+                    const prevName = routeIdx === 0 ? 'राहुरी' : ordered[routeIdx - 1]?.name;
+                    const distKey = `${prevName}→${place.name}`;
+                    const dist = DISTANCES[distKey];
                     return (
                       <motion.button key={place.name} whileHover={{ x: 3 }}
                         onClick={() => handleSelect(place)}
                         className={`w-full flex items-center gap-3 px-4 py-3 border-b border-gray-50 transition-colors text-left ${isActive ? 'bg-orange-50' : 'hover:bg-gray-50'}`}
                         style={isActive ? { borderLeft: `3px solid ${cfg.color}` } : {}}>
-                        <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm shrink-0"
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm shrink-0 text-white text-xs font-extrabold"
                           style={{ background: cfg.color }}>
-                          <MapPin size={15} className="text-white" />
+                          {routeIdx + 1}
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="font-extrabold text-gray-800 text-sm truncate">{place.name}</p>
                           <p className="text-xs font-semibold text-gray-500 truncate leading-tight mt-0.5">{place.subInfo}</p>
+                          {dist && (
+                            <p className="text-[10px] text-orange-500 font-bold mt-0.5">📍 {prevName} पासून ~{dist} किमी</p>
+                          )}
                         </div>
                         <div className="flex flex-col items-end gap-1 shrink-0">
                           <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-md"
@@ -336,7 +393,7 @@ export default function LiveLocation() {
               {[
                 { icon: <MapPin size={14} />, label: 'तीर्थस्थळे', value: `${ordered.length}+` },
                 { icon: <Map size={14} />,    label: 'राज्ये',      value: '7' },
-                { icon: <Bus size={14} />,    label: 'किमी',        value: '~4500' },
+                { icon: <Bus size={14} />,    label: 'किमी',        value: '~5,600' },
               ].map(s => (
                 <div key={s.label} className="py-3 text-center">
                   <div className="flex items-center justify-center gap-1 text-orange-500 mb-0.5">{s.icon}</div>
@@ -419,17 +476,34 @@ export default function LiveLocation() {
         {/* ── Route strip ── */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-[400] bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg px-5 py-2.5 border border-gray-100 flex items-center gap-2 text-xs text-gray-600 font-medium whitespace-nowrap max-w-[90vw] overflow-x-auto"
           style={{ scrollbarWidth: 'none' }}>
-          <Home size={12} className="text-orange-500 shrink-0" />
-          <span className="text-orange-600 font-bold shrink-0">राहुरी</span>
-          {STATE_ORDER.map(s => (
-            <span key={s} className="flex items-center gap-1 shrink-0">
-              <ChevronRight size={11} className="text-gray-300" />
-              <span className="font-semibold" style={{ color: STATE_CFG[s].color }}>{s}</span>
-            </span>
-          ))}
-          <ChevronRight size={11} className="text-gray-300 shrink-0" />
-          <Home size={12} className="text-orange-500 shrink-0" />
-          <span className="text-orange-600 font-bold shrink-0">राहुरी</span>
+          <button onClick={() => setFlyTarget(RAHURI)} className="flex items-center gap-1 hover:text-orange-600 transition-colors shrink-0">
+            <Home size={12} className="text-orange-500" />
+            <span className="text-orange-600 font-bold">राहुरी</span>
+          </button>
+          {ordered.map((place, i) => {
+            const cfg = STATE_CFG[place.state];
+            const distKey = `${i === 0 ? 'राहुरी' : ordered[i-1].name}→${place.name}`;
+            const dist = DISTANCES[distKey];
+            return (
+              <span key={place.name} className="flex items-center gap-1 shrink-0">
+                <ChevronRight size={11} className="text-gray-300" />
+                {dist && <span className="text-gray-400 text-[10px]">{dist}km</span>}
+                <ChevronRight size={11} className="text-gray-300" />
+                <button onClick={() => handleSelect(place)}
+                  className="font-bold hover:underline transition-colors"
+                  style={{ color: cfg.color }}>
+                  {place.name}
+                </button>
+              </span>
+            );
+          })}
+          <span className="flex items-center gap-1 shrink-0">
+            <ChevronRight size={11} className="text-gray-300" />
+            <span className="text-gray-400 text-[10px]">{DISTANCES['शेगाव→राहुरी']}km</span>
+            <ChevronRight size={11} className="text-gray-300" />
+            <Home size={12} className="text-orange-500" />
+            <span className="text-orange-600 font-bold">राहुरी</span>
+          </span>
         </div>
       </div>
     </div>
