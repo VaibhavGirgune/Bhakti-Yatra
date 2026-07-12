@@ -2,21 +2,49 @@
 
 @theme {
   --font-display: 'Mukta', system-ui, sans-serif;
-  --color-brand-50: #f0fdfa;
-  --color-brand-100: #ccfbf1;
-  --color-brand-600: #0d9488;
-  --color-brand-700: #0f766e;
-  --color-brand-800: #115e59;
-  --color-brand-900: #134e4a;
-  --color-saffron: #ea580c;
-  --color-saffron-light: #fff7ed;
+
+  /* Spiritual Palette */
+  --color-saffron:        #d4580a;
+  --color-saffron-light:  #fff8f0;
+  --color-gold:           #c8860a;
+  --color-gold-light:     #fefaeb;
+  --color-maroon:         #7b1a1a;
+  --color-maroon-light:   #fdf2f2;
+  --color-cream:          #fdf6e3;
+  --color-brand-50:       #fdf6e3;
+  --color-brand-100:      #fbecc8;
+  --color-brand-600:      #c8860a;
+  --color-brand-700:      #a06c08;
+  --color-brand-800:      #7b1a1a;
+  --color-brand-900:      #4a0f0f;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-display);
   -webkit-font-smoothing: antialiased;
+  background-color: #fdf6e3;
 }
+
+/* Spiritual divider */
+.spiritual-divider {
+  border: none;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #c8860a, #d4580a, #c8860a, transparent);
+  margin: 0 auto;
+}
+
+/* Om symbol pulse */
+@keyframes om-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.08); }
+}
+.om-pulse { animation: om-pulse 3s ease-in-out infinite; }
+
+/* Diya flicker */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.75; }
+}
+.diya-flicker { animation: flicker 1.4s ease-in-out infinite; }

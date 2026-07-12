@@ -1,142 +1,112 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
-const routeData = [
-  {
-    id: 1,
-    state: 'मध्यप्रदेश',
-    count: 5,
-    places: ['ओंकारेश्वर', 'उज्जैन', 'चित्रकूट', 'गुप्तगोदावरी', 'सती अनुसया'],
-    showMax: 3,
-  },
-  {
-    id: 2,
-    state: 'उत्तरप्रदेश',
-    count: 4,
-    places: ['इलाहाबाद (प्रयागराज)', 'अयोध्या', 'काशी (वाराणसी)', 'गोरखपूर'],
-    showMax: 3,
-  },
-  {
-    id: 3,
-    state: 'नेपाळ',
-    count: 3,
-    places: ['मनकामना देवी', 'काठमांडू (पशुपतिनाथ)', 'जनकपूर'],
-    showMax: 3,
-  },
-  {
-    id: 4,
-    state: 'बिहार',
-    count: 2,
-    places: ['गया', 'बोधगया'],
-    showMax: 3,
-  },
-  {
-    id: 5,
-    state: 'पश्चिम बंगाल',
-    count: 2,
-    places: ['कोलकाता', 'गंगासागर'],
-    showMax: 3,
-  },
-  {
-    id: 6,
-    state: 'ओडिशा',
-    count: 2,
-    places: ['जगन्नाथपुरी', 'भुवनेश्वर'],
-    showMax: 3,
-  },
-  {
-    id: 7,
-    state: 'महाराष्ट्र',
-    count: 1,
-    places: ['शेगाव'],
-    showMax: 3,
-  },
+const ROUTE_STOPS = [
+  'राहुरी',
+  'त्र्यंबकेश्वर ज्योतिर्लिंग',
+  'गंगाद्वार',
+  'स्टॅच्यू ऑफ युनिटी (केवडिया)',
+  'कुबेर भंडारी मंदिर',
+  'नीलकंठ धाम (पोइचा)',
+  'उनाई माता मंदिर',
+  'जलाराम मंदिर (वीरपूर)',
+  'गिरनार (BAPS स्वामीनारायण मंदिर)',
+  'गिरनार परिक्रमा',
+  'जटा शंकर',
+  'अंबा माता मंदिर',
+  'गोरखनाथ शिखर',
+  'गुरु दत्तात्रेय शिखर',
+  'सोमनाथ महादेव मंदिर',
+  'त्रिवेणी संगम',
+  'भालका तीर्थ',
+  'गीता मंदिर',
+  'लक्ष्मी नारायण मंदिर',
+  'सूर्य मंदिर',
+  'पंच पांडव गुफा',
+  'बाण गंगा',
+  'द्वारका धाम',
+  'नागेश्वर ज्योतिर्लिंग',
+  'बेट द्वारका',
+  'सप्तश्रृंगी देवी मंदिर (वणी)',
 ];
 
-function RouteCard({ item, index }) {
-  const [expanded, setExpanded] = useState(false);
-  const visiblePlaces = expanded ? item.places : item.places.slice(0, item.showMax);
-  const extraCount = item.places.length - item.showMax;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.07 }}
-      className="bg-white rounded-2xl border border-orange-100 shadow-sm hover:shadow-md transition-shadow duration-300 p-5 flex flex-col gap-3 min-w-0"
-    >
-      {/* Number badge */}
-      <div className="flex justify-center">
-        <span className="w-12 h-12 rounded-full bg-orange-500 text-white text-xl font-extrabold flex items-center justify-center shadow-md">
-          {item.id}
-        </span>
-      </div>
-
-      {/* State name */}
-      <h3 className="text-center text-base font-extrabold text-gray-800 whitespace-nowrap">{item.state}</h3>
-
-      {/* Place count */}
-      <p className="text-center text-sm font-bold text-orange-500">
-        {item.count} ठिकाणे
-      </p>
-
-      {/* Divider */}
-      <div className="border-t border-orange-100" />
-
-      {/* Places list */}
-      <ul className="space-y-1">
-        {visiblePlaces.map((place) => (
-          <li key={place} className="flex items-start gap-2 text-sm text-gray-700">
-            <span className="text-orange-400 mt-0.5">•</span>
-            <span>{place}</span>
-          </li>
-        ))}
-      </ul>
-
-      {/* Show more / less */}
-      {extraCount > 0 && (
-        <button
-          onClick={() => setExpanded(!expanded)}
-          className="text-xs font-bold text-orange-500 hover:text-orange-700 text-left transition-colors"
-        >
-          {expanded ? '▲ कमी दाखवा' : `+ ${extraCount} अधिक`}
-        </button>
-      )}
-    </motion.div>
-  );
-}
+// Color per region
+const REGION_COLOR = (stop) => {
+  const mh = ['राहुरी', 'त्र्यंबकेश्वर ज्योतिर्लिंग', 'सप्तश्रृंगी देवी मंदिर (वणी)'];
+  if (mh.includes(stop)) return { bg: 'bg-green-500', text: 'text-green-600', border: 'border-green-200', light: 'bg-green-50', label: 'MH' };
+  return { bg: 'bg-amber-500', text: 'text-amber-600', border: 'border-amber-200', light: 'bg-amber-50', label: 'GJ' };
+};
 
 export default function YatraRoute() {
-  const firstRow = routeData.slice(0, 4);
-  const secondRow = routeData.slice(4);
-
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-5xl mx-auto">
+
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-10">
+          <span className="inline-block bg-orange-100 text-orange-600 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4">
+            🛕 यात्रा मार्ग
+          </span>
           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-3">
             आमचा पवित्र यात्रा मार्ग
           </h1>
-          <p className="text-gray-500 text-base font-medium">
-            ७ राज्यांमधील 15+ पवित्र तीर्थक्षेत्रांना एकाच यात्रेत भेट द्या
+          <p className="text-gray-500 text-base font-medium mb-2">
+            राहुरी ते गुजरात-महाराष्ट्र — {ROUTE_STOPS.length - 1} पवित्र तीर्थक्षेत्रे
           </p>
+          {/* Legend */}
+          <div className="flex justify-center gap-4 mt-3">
+            <span className="flex items-center gap-1.5 text-xs font-bold text-green-700">
+              <span className="w-3 h-3 rounded-full bg-green-500 inline-block" /> महाराष्ट्र
+            </span>
+            <span className="flex items-center gap-1.5 text-xs font-bold text-amber-700">
+              <span className="w-3 h-3 rounded-full bg-amber-500 inline-block" /> गुजरात
+            </span>
+          </div>
         </div>
 
-        {/* Row 1 — 4 cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-5">
-          {firstRow.map((item, i) => (
-            <RouteCard key={item.id} item={item} index={i} />
-          ))}
+        {/* Route Cards Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+          {ROUTE_STOPS.map((stop, i) => {
+            const isHome = i === 0 || i === ROUTE_STOPS.length - 1;
+            const region = REGION_COLOR(stop);
+            return (
+              <motion.div
+                key={`${stop}-${i}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: (i % 10) * 0.05 }}
+                className={`bg-white rounded-2xl border p-4 flex flex-col items-center text-center gap-2 shadow-sm hover:shadow-md transition-all
+                  ${isHome ? 'border-orange-400 bg-orange-50' : region.border}`}
+              >
+                <span className={`w-8 h-8 rounded-full text-sm font-extrabold flex items-center justify-center shadow text-white
+                  ${isHome ? 'bg-orange-500' : region.bg}`}>
+                  {isHome ? '🏠' : i}
+                </span>
+                <p className="text-xs font-bold text-gray-800 leading-snug">{stop}</p>
+                {!isHome && (
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${region.light} ${region.text}`}>
+                    {region.label}
+                  </span>
+                )}
+              </motion.div>
+            );
+          })}
         </div>
 
-        {/* Row 2 — 3 cards, centered */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:w-3/4 lg:mx-auto">
-          {secondRow.map((item, i) => (
-            <RouteCard key={item.id} item={item} index={i + 4} />
-          ))}
-        </div>
+        {/* Full route strip */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-10 bg-white rounded-2xl border border-orange-100 shadow-sm p-5"
+        >
+          <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">📍 संपूर्ण मार्ग</p>
+          <p className="text-sm font-semibold text-gray-700 leading-relaxed">
+            {ROUTE_STOPS.join(' → ')}
+          </p>
+        </motion.div>
+
       </div>
     </div>
   );

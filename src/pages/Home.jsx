@@ -2,31 +2,29 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
-  Map, Landmark, Bus, ShieldCheck,
+  Map, Landmark, ShieldCheck,
   Shield, AirVent, BookOpen,
-  ChevronRight, ArrowDown, MessageCircle, ClipboardList, HandHeart, Phone
+  ChevronRight, ArrowDown, MessageCircle, ClipboardList, Phone
 } from 'lucide-react';
-import { homeSliderImages, tours, contactDetails } from '../data/data';
+import { tours, contactDetails } from '../data/data';
 
-// Correct display order for route section
-const stateOrder = ['मध्यप्रदेश', 'उत्तरप्रदेश', 'नेपाळ', 'बिहार', 'पश्चिम बंगाल', 'ओडिशा', 'महाराष्ट्र'];
+// Show Gujarat and Maharashtra yatra routes
+const stateOrder = ['महाराष्ट्र (विशेष यात्रा)', 'गुजरात (विशेष यात्रा)'];
 const sortedTours = [
   ...stateOrder.map(name => tours.find(t => t.state === name)).filter(Boolean),
-  ...tours.filter(t => !stateOrder.includes(t.state)),
 ];
 
 const featuredPlaces = [
-  'इलाहाबाद (प्रयागराज)',
-  'अयोध्या',
-  'काशी (वाराणसी)',
-  'जगन्नाथपुरी',
-  'काठमांडू (पशुपतिनाथ)',
+  'त्र्यंबकेश्वर ज्योतिर्लिंग',
+  'सोमनाथ महादेव मंदिर',
+  'द्वारका धाम',
+  'गिरनार परिक्रमा व शिखरे',
+  'सप्तश्रृंगी देवी मंदिर (वणी)',
 ];
 
 const stats = [
-  { value: "७", label: "पवित्र राज्ये", Icon: Map },
-  { value: "15+", label: "तीर्थक्षेत्रे", Icon: Landmark },
-  { value: "५०", label: "आरामदायी सीट्स", Icon: Bus },
+  { value: "२", label: "पवित्र राज्ये", Icon: Map },
+  { value: "26+", label: "तीर्थक्षेत्रे", Icon: Landmark },
   { value: "१००%", label: "सुरक्षित प्रवास", Icon: ShieldCheck },
 ];
 
@@ -105,7 +103,7 @@ export default function Home() {
 
           <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto leading-relaxed">
             पवित्र तीर्थक्षेत्रांची सुरक्षित, आरामदायी आणि संस्मरणीय यात्रा —
-            <span className="text-orange-300 font-extrabold"> ७ राज्ये, 15+ ठिकाणे</span>
+            <span className="text-orange-300 font-extrabold"> गुजरात-महाराष्ट्र, 26+ ठिकाणे</span>
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -136,18 +134,14 @@ export default function Home() {
       </section>
 
       {/* ── Stats Bar ── */}
-      <section className="bg-gradient-to-r from-orange-600 to-orange-500 text-white py-8 px-4 shadow-lg">
-        <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+      <section className="bg-gradient-to-r from-[#7b1a1a] via-[#a0350a] to-[#7b1a1a] text-white py-6 px-4 shadow-lg border-y-2 border-yellow-600/40">
+        <div className="max-w-5xl mx-auto grid grid-cols-3 gap-6">
           {stats.map((s, i) => (
-            <motion.div
-              key={i}
-              {...fadeUp(i * 0.1)}
-              className="flex items-center gap-4"
-            >
-              <span className="text-4xl flex-shrink-0">{s.Icon && <s.Icon size={36} strokeWidth={1.8} />}</span>
+            <motion.div key={i} {...fadeUp(i * 0.1)} className="flex items-center gap-4 justify-center">
+              <span className="text-yellow-300 flex-shrink-0">{s.Icon && <s.Icon size={32} strokeWidth={1.8} />}</span>
               <div>
-                <div className="text-3xl font-extrabold tracking-tight leading-none">{s.value}</div>
-                <div className="text-orange-100 text-sm font-extrabold mt-1">{s.label}</div>
+                <div className="text-2xl font-extrabold tracking-tight leading-none text-yellow-200">{s.value}</div>
+                <div className="text-yellow-100/80 text-sm font-bold mt-0.5">{s.label}</div>
               </div>
             </motion.div>
           ))}
@@ -155,80 +149,66 @@ export default function Home() {
       </section>
 
       {/* ── Route Section ── */}
-      <section className="py-10 px-4 md:px-8 bg-white">
+      <section className="py-10 px-4 md:px-8 bg-[#fdf6e3]">
         <div className="max-w-6xl mx-auto">
-          <motion.div {...fadeUp()} className="text-center mb-12">
-            <span className="inline-block bg-orange-100 text-orange-600 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4">
-              यात्रा मार्ग
+          <motion.div {...fadeUp()} className="text-center mb-10">
+            <span className="inline-block bg-yellow-100 text-yellow-800 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4 border border-yellow-300">
+              🕉️ यात्रा मार्ग
             </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#7b1a1a] mb-3">
               आमचा पवित्र यात्रा मार्ग
             </h2>
-            <p className="text-gray-500 max-w-xl mx-auto text-base font-semibold">
-              ७ राज्यांमधील 15+ पवित्र तीर्थक्षेत्रांना एकाच यात्रेत भेट द्या
+            <p className="text-[#a06c08] max-w-xl mx-auto text-base font-semibold">
+              गुजरात व महाराष्ट्र राज्यांमधील 26+ पवित्र तीर्थक्षेत्रांना एकाच यात्रेत भेट द्या
             </p>
+            <div className="spiritual-divider w-48 mt-4 mx-auto" />
           </motion.div>
 
           {/* KM Stats */}
-       
+          <motion.div {...fadeUp(0.1)} className="flex flex-wrap justify-center gap-4 mb-10">
+            {[
+              { label: 'एकूण अंतर', value: '~2,556 किमी', icon: '🛣️' },
+              { label: 'राज्ये', value: '२', icon: '🗺️' },
+              { label: 'तीर्थक्षेत्रे', value: '26+', icon: '🛕' },
+              { label: 'अंदाजे दिवस', value: '12-15', icon: '📅' },
+            ].map(stat => (
+              <div key={stat.label} className="flex items-center gap-3 bg-yellow-50 border border-yellow-300 rounded-2xl px-5 py-3 shadow-sm">
+                <span className="text-2xl">{stat.icon}</span>
+                <div>
+                  <p className="text-xs text-[#a06c08] font-semibold">{stat.label}</p>
+                  <p className="text-lg font-extrabold text-[#7b1a1a]">{stat.value}</p>
+                </div>
+              </div>
+            ))}
+          </motion.div>
 
-          {/* Row 1 — 4 cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-5">
-            {sortedTours.slice(0, 4).map((tour, i) => (
+          {/* Route Cards — 2 states centered */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+            {sortedTours.map((tour, i) => (
               <motion.div
                 key={tour.state}
                 {...fadeUp(i * 0.1)}
-                className="relative bg-white border-2 border-orange-100 hover:border-orange-400 rounded-2xl p-6 text-center shadow-sm hover:shadow-xl transition-all duration-300 group"
+                className="relative bg-white border-2 border-yellow-300 hover:border-yellow-500 rounded-2xl p-6 text-center shadow-sm hover:shadow-xl transition-all duration-300 group"
+                style={{ background: 'linear-gradient(135deg, #fff8f0 0%, #fdf6e3 100%)' }}
               >
-                <div className="w-11 h-11 bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-full flex items-center justify-center font-extrabold text-lg mx-auto mb-4 shadow-md group-hover:scale-110 transition-transform">
+                <div className="w-11 h-11 text-white rounded-full flex items-center justify-center font-extrabold text-lg mx-auto mb-4 shadow-md group-hover:scale-110 transition-transform"
+                  style={{ background: 'linear-gradient(135deg, #c8860a, #d4580a)' }}>
                   {i + 1}
                 </div>
-                <h3 className="font-extrabold text-gray-800 text-base mb-1 whitespace-nowrap">{tour.state}</h3>
-                <p className="text-orange-500 text-sm font-bold mb-3">
+                <h3 className="font-extrabold text-[#7b1a1a] text-base mb-1">{tour.state}</h3>
+                <p className="text-[#c8860a] text-sm font-bold mb-3">
                   {tour.places.length} ठिकाणे
                 </p>
+                <div className="w-12 spiritual-divider mb-3" />
                 <ul className="space-y-1.5">
-                  {tour.places.slice(0, 3).map(p => (
-                    <li key={p.name} className="text-gray-600 text-xs font-semibold flex items-center gap-1.5 justify-center">
-                      <span className="w-1 h-1 rounded-full bg-orange-400 inline-block flex-shrink-0" />
-                      {p.name}
+                  {tour.places.slice(0, 4).map(p => (
+                    <li key={p.name} className="text-[#7b1a1a]/80 text-xs font-semibold flex items-center gap-1.5 justify-center">
+                      <span className="text-yellow-600">🪔</span> {p.name}
                     </li>
                   ))}
-                  {tour.places.length > 3 && (
-                    <li className="text-orange-400 text-xs font-semibold mt-1">
-                      + {tour.places.length - 3} अधिक
-                    </li>
-                  )}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Row 2 — 3 cards centered */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:w-3/4 lg:mx-auto">
-            {sortedTours.slice(4).map((tour, i) => (
-              <motion.div
-                key={tour.state}
-                {...fadeUp((i + 4) * 0.1)}
-                className="relative bg-white border-2 border-orange-100 hover:border-orange-400 rounded-2xl p-6 text-center shadow-sm hover:shadow-xl transition-all duration-300 group"
-              >
-                <div className="w-11 h-11 bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-full flex items-center justify-center font-extrabold text-lg mx-auto mb-4 shadow-md group-hover:scale-110 transition-transform">
-                  {i + 5}
-                </div>
-                <h3 className="font-extrabold text-gray-800 text-base mb-1 whitespace-nowrap">{tour.state}</h3>
-                <p className="text-orange-500 text-sm font-bold mb-3">
-                  {tour.places.length} ठिकाणे
-                </p>
-                <ul className="space-y-1.5">
-                  {tour.places.slice(0, 3).map(p => (
-                    <li key={p.name} className="text-gray-600 text-xs font-semibold flex items-center gap-1.5 justify-center">
-                      <span className="w-1 h-1 rounded-full bg-orange-400 inline-block flex-shrink-0" />
-                      {p.name}
-                    </li>
-                  ))}
-                  {tour.places.length > 3 && (
-                    <li className="text-orange-400 text-xs font-semibold mt-1">
-                      + {tour.places.length - 3} अधिक
+                  {tour.places.length > 4 && (
+                    <li className="text-[#c8860a] text-xs font-bold mt-1">
+                      + {tour.places.length - 4} अधिक
                     </li>
                   )}
                 </ul>
@@ -238,22 +218,50 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Highlights Section ── */}
-      <section className="py-10 bg-gradient-to-b from-orange-50 to-white">
-        <div className="max-w-6xl mx-auto px-4 md:px-8">
-          <motion.div {...fadeUp()} className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-4">
-            <div>
-              <span className="inline-block bg-orange-100 text-orange-600 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-3">
-                प्रमुख ठिकाणे
+      {/* ── Gujarat Yatra Route Info ── */}
+      <section className="py-8 px-4 md:px-8" style={{ background: 'linear-gradient(135deg, #7b1a1a 0%, #a0350a 50%, #7b1a1a 100%)' }}>
+        <div className="max-w-6xl mx-auto">
+          <motion.div {...fadeUp()} className="text-center mb-5">
+            <span className="inline-block bg-yellow-400/20 text-yellow-200 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-3 border border-yellow-400/40">
+              🛕 संपूर्ण यात्रा मार्ग
+            </span>
+            <h3 className="text-yellow-100 font-extrabold text-xl">राहुरी पासून संपूर्ण यात्रा मार्ग</h3>
+            <p className="text-yellow-200/70 text-sm mt-1">एकूण ~2,556 किमी • 26 पवित्र ठिकाणे</p>
+          </motion.div>
+          <motion.div {...fadeUp(0.1)} className="flex flex-wrap justify-center gap-2 text-sm font-bold">
+            {[
+              'राहुरी','त्र्यंबकेश्वर ज्योतिर्लिंग','गंगाद्वार','स्टॅच्यू ऑफ युनिटी (केवडिया)',
+              'कुबेर भंडारी मंदिर','नीलकंठ धाम (पोइचा)','उनाई माता मंदिर',
+              'जलाराम मंदिर (वीरपूर)','गिरनार (BAPS स्वामीनारायण)','गिरनार परिक्रमा',
+              'जटा शंकर','अंबा माता मंदिर','गोरखनाथ शिखर','गुरु दत्तात्रेय शिखर',
+              'सोमनाथ महादेव','त्रिवेणी संगम','भालका तीर्थ','गीता मंदिर',
+              'लक्ष्मी नारायण मंदिर','सूर्य मंदिर','पंच पांडव गुफा','बाण गंगा',
+              'द्वारका धाम','नागेश्वर ज्योतिर्लिंग','बेट द्वारका','सप्तश्रृंगी देवी (वणी)','राहुरी'
+            ].map((stop, i, arr) => (
+              <span key={i} className="flex items-center gap-1">
+                <span className="bg-yellow-400/15 hover:bg-yellow-400/30 text-yellow-100 px-3 py-1.5 rounded-full transition-colors cursor-default border border-yellow-400/20 text-xs">
+                  {stop}
+                </span>
+                {i < arr.length - 1 && <span className="text-yellow-400/50 text-xs">›</span>}
               </span>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Highlights Section ── */}
+      <section className="py-10 bg-[#fdf6e3]">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <motion.div {...fadeUp()} className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 gap-4">
+            <div>
+              <span className="inline-block bg-yellow-100 text-yellow-800 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-3 border border-yellow-300">
+                🪔 प्रमुख ठिकाणे
+              </span>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[#7b1a1a]">
                 प्रमुख आकर्षणे
               </h2>
             </div>
-            <Link
-              to="/yatra"
-              className="inline-flex items-center gap-1.5 text-orange-600 hover:text-orange-800 font-semibold text-sm border border-orange-200 hover:border-orange-400 px-4 py-2 rounded-full transition-all"
-            >
+            <Link to="/yatra" className="inline-flex items-center gap-1.5 text-[#c8860a] hover:text-[#7b1a1a] font-semibold text-sm border border-yellow-400 hover:border-yellow-600 px-4 py-2 rounded-full transition-all bg-yellow-50">
               सर्व पहा <ChevronRight size={14} />
             </Link>
           </motion.div>
@@ -296,32 +304,26 @@ export default function Home() {
       </section>
 
       {/* ── Why Choose Us ── */}
-      <section className="py-10 px-4 md:px-8 bg-white">
+      <section className="py-10 px-4 md:px-8 bg-[#fdf6e3]">
         <div className="max-w-5xl mx-auto">
-          <motion.div {...fadeUp()} className="text-center mb-12">
-            <span className="inline-block bg-orange-100 text-orange-600 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4">
-              आमची वैशिष्ट्ये
+          <motion.div {...fadeUp()} className="text-center mb-10">
+            <span className="inline-block bg-yellow-100 text-yellow-800 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4 border border-yellow-300">
+              🙏 आमची वैशिष्ट्ये
             </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
-              आम्हीच का ?
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#7b1a1a]">आम्हीच का ?</h2>
           </motion.div>
-
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {whyUs.map((item, i) => (
-              <motion.div
-                key={i}
-                {...fadeUp(i * 0.12)}
-                className={`bg-gradient-to-br ${item.color} border ${item.border} rounded-2xl p-6 flex items-start gap-4 hover:shadow-lg transition-all duration-300 hover:-translate-y-1`}
+              <motion.div key={i} {...fadeUp(i * 0.12)}
+                className="bg-white border-2 border-yellow-200 rounded-2xl p-6 flex items-start gap-4 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                style={{ background: 'linear-gradient(135deg, #fefaeb 0%, #fff8f0 100%)' }}
               >
-                {/* Left icon */}
-                <div className={`w-14 h-14 ${item.iconBg} rounded-2xl flex items-center justify-center shadow-sm flex-shrink-0`}>
-                  <item.Icon size={26} strokeWidth={1.8} className={item.iconColor} />
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm flex-shrink-0 bg-yellow-100 border border-yellow-300">
+                  <item.Icon size={26} strokeWidth={1.8} className="text-[#c8860a]" />
                 </div>
-                {/* Right content */}
                 <div>
-                  <h3 className="font-extrabold text-gray-800 text-base mb-1.5">{item.title}</h3>
-                  <p className="text-gray-700 text-sm font-bold leading-relaxed">{item.desc}</p>
+                  <h3 className="font-extrabold text-[#7b1a1a] text-base mb-1.5">{item.title}</h3>
+                  <p className="text-[#7b1a1a]/70 text-sm font-bold leading-relaxed">{item.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -330,64 +332,51 @@ export default function Home() {
       </section>
 
       {/* ── Travel Facilities Section ── */}
-      <section className="py-10 px-4 md:px-8 bg-orange-50">
+      <section className="py-10 px-4 md:px-8" style={{ background: 'linear-gradient(135deg, #7b1a1a 0%, #4a0f0f 100%)' }}>
         <div className="max-w-5xl mx-auto">
           <motion.div {...fadeUp()} className="text-center mb-10">
-            <span className="inline-block bg-orange-100 text-orange-600 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4">
-              सुविधा
+            <span className="inline-block bg-yellow-400/20 text-yellow-200 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4 border border-yellow-400/30">
+              🛕 सुविधा
             </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-yellow-100 mb-3">
               प्रवासात मिळणाऱ्या सुविधा
             </h2>
+            <div className="spiritual-divider w-48 mt-2 mx-auto opacity-50" />
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            {/* Food & Travel */}
-            <motion.div {...fadeUp(0.1)} className="bg-white rounded-2xl p-6 shadow-sm border border-orange-100">
-              <h3 className="text-lg font-extrabold text-orange-600 mb-4 flex items-center gap-2">
+            <motion.div {...fadeUp(0.1)} className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-yellow-400/20">
+              <h3 className="text-lg font-extrabold text-yellow-200 mb-4 flex items-center gap-2">
                 🍽️ जेवण व नाश्ता
               </h3>
               <ul className="space-y-2.5">
-                {[
-                  'दोन वेळचे शुद्ध शाकाहारी जेवण',
-                  'गरजेनुसार नाश्ता',
-                  'सकाळी नाश्ता',
-                  'पिण्याचे शुद्ध पाणी (बाटली)',
-                ].map(item => (
-                  <li key={item} className="flex items-center gap-2 text-gray-700 text-sm font-semibold">
-                    <span className="text-green-500 font-bold">✔</span> {item}
+                {['दोन वेळचे शुद्ध शाकाहारी जेवण','गरजेनुसार नाश्ता','सकाळी नाश्ता','पिण्याचे शुद्ध पाणी (बाटली)'].map(item => (
+                  <li key={item} className="flex items-center gap-2 text-yellow-100 text-sm font-semibold">
+                    <span className="text-yellow-300 font-bold">✔</span> {item}
                   </li>
                 ))}
               </ul>
             </motion.div>
 
-            {/* Bus & Comfort */}
-            <motion.div {...fadeUp(0.2)} className="bg-white rounded-2xl p-6 shadow-sm border border-orange-100">
-              <h3 className="text-lg font-extrabold text-orange-600 mb-4 flex items-center gap-2">
+            <motion.div {...fadeUp(0.2)} className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-yellow-400/20">
+              <h3 className="text-lg font-extrabold text-yellow-200 mb-4 flex items-center gap-2">
                 🚌 बस व प्रवास सुविधा
               </h3>
               <ul className="space-y-2.5">
-                {[
-                  'संपूर्ण प्रवास स्लीपर कोच AC बसने',
-                  'आरामदायी बेड व्यवस्था',
-                  'मोबाइल चार्जिंग पॉइंट',
-                  'अनुभवी ड्रायव्हर',
-                  'सुरक्षित आणि आरामदायी प्रवास',
-                ].map(item => (
-                  <li key={item} className="flex items-center gap-2 text-gray-700 text-sm font-semibold">
-                    <span className="text-green-500 font-bold">✔</span> {item}
+                {['संपूर्ण प्रवास स्लीपर कोच AC बसने','आरामदायी बेड व्यवस्था','मोबाइल चार्जिंग पॉइंट','अनुभवी ड्रायव्हर','सुरक्षित आणि आरामदायी प्रवास'].map(item => (
+                  <li key={item} className="flex items-center gap-2 text-yellow-100 text-sm font-semibold">
+                    <span className="text-yellow-300 font-bold">✔</span> {item}
                   </li>
                 ))}
               </ul>
             </motion.div>
 
-            {/* Important Note */}
-            <motion.div {...fadeUp(0.4)} className="bg-amber-50 rounded-2xl p-6 shadow-sm border border-amber-200 md:col-span-2">
-              <h3 className="text-xl font-extrabold text-amber-700 mb-3 flex items-center gap-2">
+            <motion.div {...fadeUp(0.4)} className="bg-yellow-400/10 rounded-2xl p-6 border border-yellow-400/30 md:col-span-2">
+              <h3 className="text-xl font-extrabold text-yellow-200 mb-3 flex items-center gap-2">
                 📌 महत्त्वाची सूचना
               </h3>
-              <p className="text-gray-700 text-base font-semibold leading-relaxed">
-                प्रवासादरम्यान होणारे सर्व सामान्य खर्च (उदा. वाहन खर्च, राहण्याची व्यवस्था, नाश्ता, जेवण व इतर आवश्यक खर्च) हे शेवटी सर्व यात्रेकरूंमध्ये <span className="text-amber-700 font-extrabold">समान प्रमाणात विभागले जातील.</span>
+              <p className="text-yellow-100 text-base font-semibold leading-relaxed">
+                प्रवासादरम्यान होणारे सर्व सामान्य खर्च (उदा. वाहन खर्च, राहण्याची व्यवस्था, नाश्ता, जेवण व इतर आवश्यक खर्च) हे शेवटी सर्व यात्रेकरूंमध्ये <span className="text-yellow-300 font-extrabold">समान प्रमाणात विभागले जातील.</span>
               </p>
             </motion.div>
           </div>
@@ -395,42 +384,26 @@ export default function Home() {
       </section>
 
       {/* ── CTA Section ── */}
-      <section className="py-10 px-4 relative overflow-hidden">
-        {/* background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-600 via-orange-500 to-amber-500" />
-        <div className="absolute inset-0 opacity-10"
-          style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, white 1px, transparent 1px), radial-gradient(circle at 80% 20%, white 1px, transparent 1px)', backgroundSize: '40px 40px' }}
+      <section className="py-10 px-4 relative overflow-hidden bg-[#fdf6e3]">
+        <div className="absolute inset-0 opacity-5"
+          style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Ctext x=\'50%25\' y=\'55%25\' font-size=\'30\' text-anchor=\'middle\' dominant-baseline=\'middle\' fill=\'%237b1a1a\'%3E🕉%3C/text%3E%3C/svg%3E")', backgroundSize: '60px 60px' }}
         />
-
-        <motion.div
-          {...fadeUp()}
-          className="relative z-10 max-w-2xl mx-auto text-center text-white"
-        >
-          <div className="flex justify-center mb-5">
-            <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
-              <HandHeart size={32} className="text-white" />
-            </div>
-          </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-4 leading-tight">
+        <motion.div {...fadeUp()} className="relative z-10 max-w-2xl mx-auto text-center">
+          <div className="text-5xl mb-5 diya-flicker">🪔</div>
+          <h2 className="text-3xl md:text-4xl font-extrabold mb-4 leading-tight text-[#7b1a1a]">
             यात्रेसाठी आजच संपर्क करा
           </h2>
-          <p className="text-orange-100 mb-10 text-lg leading-relaxed">
+          <p className="text-[#a06c08] mb-10 text-lg leading-relaxed font-semibold">
             सीट्स मर्यादित आहेत — आत्ताच बुकिंग करा आणि पवित्र यात्रेचा आनंद घ्या.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href={contactDetails.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-bold rounded-full shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-green-500/40 hover:shadow-2xl"
-            >
+            <a href={contactDetails.whatsappUrl} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-green-600 hover:bg-green-700 text-white font-bold rounded-full shadow-xl transition-all duration-300 hover:scale-105">
               <MessageCircle size={18} /> WhatsApp वर संपर्क करा
             </a>
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/15 hover:bg-white/25 backdrop-blur-sm text-white font-bold rounded-full border border-white/30 shadow-lg transition-all duration-300 hover:scale-105"
-            >
-              <ClipboardList size={18} /> संपर्क 
+            <Link to="/contact"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 font-bold rounded-full border-2 border-[#c8860a] text-[#7b1a1a] hover:bg-yellow-100 shadow-lg transition-all duration-300 hover:scale-105">
+              <ClipboardList size={18} /> संपर्क
             </Link>
           </div>
         </motion.div>

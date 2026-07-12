@@ -3,12 +3,10 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { tours } from '../data/data';
 
-// Custom order: MP, UP, Nepal, Bihar, West Bengal, Odisha, Maharashtra
-const stateOrder = ['मध्यप्रदेश', 'उत्तरप्रदेश', 'नेपाळ', 'बिहार', 'पश्चिम बंगाल', 'ओडिशा', 'महाराष्ट्र'];
-const sortedTours = [
-  ...stateOrder.map(name => tours.find(t => t.state === name)).filter(Boolean),
-  ...tours.filter(t => !stateOrder.includes(t.state)),
-];
+// Show only Gujarat & Maharashtra yatra routes
+const sortedTours = tours.filter(t =>
+  t.state === 'महाराष्ट्र (विशेष यात्रा)' || t.state === 'गुजरात (विशेष यात्रा)'
+);
 
 export default function Yatra() {
   return (
@@ -17,7 +15,7 @@ export default function Yatra() {
         <div className="text-center mb-10">
           <h1 className="text-4xl md:text-5xl font-extrabold text-orange-600 mb-4">आमची धार्मिक यात्रा</h1>
           <p className="text-lg font-semibold text-gray-600 max-w-2xl mx-auto">
-            मध्यप्रदेश, उत्तरप्रदेश, नेपाळ, बिहार आणि महाराष्ट्र राज्यांमधील पवित्र स्थळांची नयनरम्य सफर.
+            मध्यप्रदेश, उत्तरप्रदेश, नेपाळ, बिहार, गुजरात आणि महाराष्ट्र राज्यांमधील पवित्र स्थळांची नयनरम्य सफर.
           </p>
         </div>
 
