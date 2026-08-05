@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap, ZoomControl } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { tours } from '../data/data';
+import { tours } from '../../data/data';
 import L from 'leaflet';
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -31,31 +31,39 @@ const STATE_CFG = {
   'महाराष्ट्र (विशेष यात्रा)': { color: '#059669', light: '#d1fae5', label: 'MH' },
 };
 
-// Optimised route order: Rahuri → MP → UP → Nepal → Bihar → WB → Odisha → Shegaon → Rahuri
+// Optimised route order: Rahuri → Trimbakeshwar → Gujarat → Saptashrungi → Rahuri
 const ROUTE_ORDER = [
   'त्र्यंबकेश्वर ज्योतिर्लिंग',
-  'स्टॅच्यू ऑफ युनिटी (केवडिया)',
-  'नीलकंठ धाम (पोइचा)',
+  'गरुडेश्वर (टेंबे स्वामी महाराज समाधी)',
+  'स्टॅच्यू ऑफ युनिटी (गंगाद्वार)',
+  'कुबेरधाम',
+  'नीलकंठ धाम (स्वामीनारायण मंदिर, पोइचा)',
+  'जुनागढ गिरनार स्वामीनारायण मंदिर',
+  'गिरनार परिक्रमा',
+  'गिरनार पर्वत',
+  'सोरटी सोमनाथ',
+  'बेट द्वारका',
+  'द्वारका',
   'जलाराम मंदिर (वीरपूर)',
-  'गिरनार परिक्रमा व शिखरे',
-  'सोमनाथ महादेव मंदिर',
-  'द्वारका धाम',
-  'नागेश्वर ज्योतिर्लिंग',
-  'सप्तश्रृंगी देवी मंदिर (वणी)',
+  'सप्तश्रृंगी वणी गड',
 ];
 
-// Verified road distances (km) — sourced from Rome2Rio & Gujarat Tourism
+// Verified road distances (km) — sourced from Rome2Rio, Google Maps & official sources
 const DISTANCES = {
   'राहुरी→त्र्यंबकेश्वर ज्योतिर्लिंग': 147,
-  'त्र्यंबकेश्वर ज्योतिर्लिंग→स्टॅच्यू ऑफ युनिटी (केवडिया)': 320,
-  'स्टॅच्यू ऑफ युनिटी (केवडिया)→नीलकंठ धाम (पोइचा)': 113,
-  'नीलकंठ धाम (पोइचा)→जलाराम मंदिर (वीरपूर)': 240,
-  'जलाराम मंदिर (वीरपूर)→गिरनार परिक्रमा व शिखरे': 45,
-  'गिरनार परिक्रमा व शिखरे→सोमनाथ महादेव मंदिर': 95,
-  'सोमनाथ महादेव मंदिर→द्वारका धाम': 233,
-  'द्वारका धाम→नागेश्वर ज्योतिर्लिंग': 18,
-  'नागेश्वर ज्योतिर्लिंग→सप्तश्रृंगी देवी मंदिर (वणी)': 1215,
-  'सप्तश्रृंगी देवी मंदिर (वणी)→राहुरी': 130,
+  'त्र्यंबकेश्वर ज्योतिर्लिंग→गरुडेश्वर (टेंबे स्वामी महाराज समाधी)': 298,
+  'गरुडेश्वर (टेंबे स्वामी महाराज समाधी)→स्टॅच्यू ऑफ युनिटी (गंगाद्वार)': 6,
+  'स्टॅच्यू ऑफ युनिटी (गंगाद्वार)→कुबेरधाम': 113,
+  'कुबेरधाम→नीलकंठ धाम (स्वामीनारायण मंदिर, पोइचा)': 3,
+  'नीलकंठ धाम (स्वामीनारायण मंदिर, पोइचा)→जुनागढ गिरनार स्वामीनारायण मंदिर': 240,
+  'जुनागढ गिरनार स्वामीनारायण मंदिर→गिरनार परिक्रमा': 5,
+  'गिरनार परिक्रमा→गिरनार पर्वत': 2,
+  'गिरनार पर्वत→सोरटी सोमनाथ': 102,
+  'सोरटी सोमनाथ→बेट द्वारका': 264,
+  'बेट द्वारका→द्वारका': 35,
+  'द्वारका→जलाराम मंदिर (वीरपूर)': 220,
+  'जलाराम मंदिर (वीरपूर)→सप्तश्रृंगी वणी गड': 340,
+  'सप्तश्रृंगी वणी गड→राहुरी': 183,
 };
 
 const STATE_ORDER = ['महाराष्ट्र (विशेष यात्रा)', 'गुजरात (विशेष यात्रा)'];
@@ -309,6 +317,20 @@ export default function LiveLocation() {
                       </motion.button>
                     );
                   })}
+
+                  {/* ── Return to Rahuri (last entry) ── */}
+                  <button onClick={() => { setFlyTarget(RAHURI); setSelected(null); }}
+                    className="w-full flex items-center gap-3 px-4 py-3 border-b border-gray-50 hover:bg-orange-50 transition-colors group">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-sm shrink-0">
+                      <Home size={16} className="text-white" />
+                    </div>
+                    <div className="text-left flex-1 min-w-0">
+                      <p className="font-bold text-gray-800 text-sm">राहुरी</p>
+                      <p className="text-[11px] text-orange-500 font-medium">परतणे — यात्रा समाप्ती</p>
+                      <p className="text-[10px] text-orange-500 font-bold mt-0.5">📍 सप्तश्रृंगी वणी गड पासून ~{DISTANCES['सप्तश्रृंगी वणी गड→राहुरी']} किमी</p>
+                    </div>
+                    <span className="text-[10px] bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full font-bold shrink-0">END</span>
+                  </button>
                 </div>
               </>
             )}
@@ -374,8 +396,8 @@ export default function LiveLocation() {
             <div className="grid grid-cols-3 divide-x divide-gray-100 border-t border-gray-100 bg-gray-50 shrink-0">
               {[
                 { icon: <MapPin size={14} />, label: 'तीर्थस्थळे', value: `${ordered.length}+` },
-                { icon: <Map size={14} />,    label: 'राज्ये',      value: '7' },
-                { icon: <Bus size={14} />,    label: 'किमी',        value: '~2,556' },
+                { icon: <Map size={14} />,    label: 'राज्ये',      value: '2' },
+                { icon: <Bus size={14} />,    label: 'किमी',        value: '~1,958' },
               ].map(s => (
                 <div key={s.label} className="py-3 text-center">
                   <div className="flex items-center justify-center gap-1 text-orange-500 mb-0.5">{s.icon}</div>
@@ -481,7 +503,7 @@ export default function LiveLocation() {
           })}
           <span className="flex items-center gap-1 shrink-0">
             <ChevronRight size={11} className="text-gray-300" />
-            <span className="text-gray-400 text-[10px]">{DISTANCES['सप्तश्रृंगी देवी मंदिर (वणी)→राहुरी']}km</span>
+            <span className="text-gray-400 text-[10px]">{DISTANCES['सप्तश्रृंगी वणी गड→राहुरी']}km</span>
             <ChevronRight size={11} className="text-gray-300" />
             <Home size={12} className="text-orange-500" />
             <span className="text-orange-600 font-bold">राहुरी</span>

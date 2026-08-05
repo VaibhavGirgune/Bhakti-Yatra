@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { busSections, busInfoText } from '../data/data';
+import { busSections, busInfoText } from '../../data/data';
 
 export default function Bus() {
   return (

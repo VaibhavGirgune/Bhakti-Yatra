@@ -6,7 +6,7 @@ import {
   Shield, AirVent, BookOpen,
   ChevronRight, ArrowDown, MessageCircle, ClipboardList, Phone
 } from 'lucide-react';
-import { tours, contactDetails } from '../data/data';
+import { tours, contactDetails } from '../../data/data';
 
 // Show Gujarat and Maharashtra yatra routes
 const stateOrder = ['महाराष्ट्र (विशेष यात्रा)', 'गुजरात (विशेष यात्रा)'];
@@ -24,7 +24,7 @@ const featuredPlaces = [
 
 const stats = [
   { value: "२", label: "पवित्र राज्ये", Icon: Map },
-  { value: "26+", label: "तीर्थक्षेत्रे", Icon: Landmark },
+  { value: "13+", label: "तीर्थक्षेत्रे", Icon: Landmark },
   { value: "१००%", label: "सुरक्षित प्रवास", Icon: ShieldCheck },
 ];
 
@@ -103,7 +103,7 @@ export default function Home() {
 
           <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto leading-relaxed">
             पवित्र तीर्थक्षेत्रांची सुरक्षित, आरामदायी आणि संस्मरणीय यात्रा —
-            <span className="text-orange-300 font-extrabold"> गुजरात-महाराष्ट्र, 26+ ठिकाणे</span>
+            <span className="text-orange-300 font-extrabold"> गुजरात-महाराष्ट्र, 13+ ठिकाणे</span>
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -159,7 +159,7 @@ export default function Home() {
               आमचा पवित्र यात्रा मार्ग
             </h2>
             <p className="text-[#a06c08] max-w-xl mx-auto text-base font-semibold">
-              गुजरात व महाराष्ट्र राज्यांमधील 26+ पवित्र तीर्थक्षेत्रांना एकाच यात्रेत भेट द्या
+              गुजरात व महाराष्ट्र राज्यांमधील 13+ पवित्र तीर्थक्षेत्रांना एकाच यात्रेत भेट द्या
             </p>
             <div className="spiritual-divider w-48 mt-4 mx-auto" />
           </motion.div>
@@ -167,9 +167,9 @@ export default function Home() {
           {/* KM Stats */}
           <motion.div {...fadeUp(0.1)} className="flex flex-wrap justify-center gap-4 mb-10">
             {[
-              { label: 'एकूण अंतर', value: '~2,556 किमी', icon: '🛣️' },
+              { label: 'एकूण अंतर', value: '~1,958 किमी', icon: '🛣️' },
               { label: 'राज्ये', value: '२', icon: '🗺️' },
-              { label: 'तीर्थक्षेत्रे', value: '26+', icon: '🛕' },
+              { label: 'तीर्थक्षेत्रे', value: '13+', icon: '🛕' },
               { label: 'अंदाजे दिवस', value: '12-15', icon: '📅' },
             ].map(stat => (
               <div key={stat.label} className="flex items-center gap-3 bg-yellow-50 border border-yellow-300 rounded-2xl px-5 py-3 shadow-sm">
@@ -226,23 +226,43 @@ export default function Home() {
               🛕 संपूर्ण यात्रा मार्ग
             </span>
             <h3 className="text-yellow-100 font-extrabold text-xl">राहुरी पासून संपूर्ण यात्रा मार्ग</h3>
-            <p className="text-yellow-200/70 text-sm mt-1">एकूण ~2,556 किमी • 26 पवित्र ठिकाणे</p>
+            <p className="text-yellow-200/70 text-sm mt-1">एकूण ~1,958 किमी • 13 पवित्र ठिकाणे</p>
           </motion.div>
           <motion.div {...fadeUp(0.1)} className="flex flex-wrap justify-center gap-2 text-sm font-bold">
             {[
-              'राहुरी','त्र्यंबकेश्वर ज्योतिर्लिंग','गंगाद्वार','स्टॅच्यू ऑफ युनिटी (केवडिया)',
-              'कुबेर भंडारी मंदिर','नीलकंठ धाम (पोइचा)','उनाई माता मंदिर',
-              'जलाराम मंदिर (वीरपूर)','गिरनार (BAPS स्वामीनारायण)','गिरनार परिक्रमा',
-              'जटा शंकर','अंबा माता मंदिर','गोरखनाथ शिखर','गुरु दत्तात्रेय शिखर',
-              'सोमनाथ महादेव','त्रिवेणी संगम','भालका तीर्थ','गीता मंदिर',
-              'लक्ष्मी नारायण मंदिर','सूर्य मंदिर','पंच पांडव गुफा','बाण गंगा',
-              'द्वारका धाम','नागेश्वर ज्योतिर्लिंग','बेट द्वारका','सप्तश्रृंगी देवी (वणी)','राहुरी'
+              { name: 'राहुरी', km: null },
+              { name: 'त्र्यंबकेश्वर ज्योतिर्लिंग', km: 147 },
+              { name: 'गरुडेश्वर (टेंबे स्वामी महाराज समाधी)', km: 298 },
+              { name: 'स्टॅच्यू ऑफ युनिटी (गंगाद्वार)', km: 6 },
+              { name: 'कुबेरधाम', km: 113 },
+              { name: 'नीलकंठ धाम (स्वामीनारायण मंदिर, पोइचा)', km: 3 },
+              { name: 'जुनागढ गिरनार स्वामीनारायण मंदिर', km: 240 },
+              { name: 'गिरनार परिक्रमा', km: 5 },
+              { name: 'गिरनार पर्वत', km: 2 },
+              { name: 'सोरटी सोमनाथ', km: 102 },
+              { name: 'बेट द्वारका', km: 264 },
+              { name: 'द्वारका', km: 35 },
+              { name: 'जलाराम मंदिर (वीरपूर)', km: 220 },
+              { name: 'सप्तश्रृंगी वणी गड', km: 340 },
+              { name: 'राहुरी', km: 183 },
             ].map((stop, i, arr) => (
               <span key={i} className="flex items-center gap-1">
-                <span className="bg-yellow-400/15 hover:bg-yellow-400/30 text-yellow-100 px-3 py-1.5 rounded-full transition-colors cursor-default border border-yellow-400/20 text-xs">
-                  {stop}
+                {stop.km !== null && (
+                  <span className="text-yellow-400/60 text-[10px] font-bold flex items-center gap-0.5">
+                    <span>›</span>
+                    <span className="bg-yellow-400/10 px-1.5 py-0.5 rounded-full border border-yellow-400/20">{stop.km}km</span>
+                    <span>›</span>
+                  </span>
+                )}
+                <span className={`px-3 py-1.5 rounded-full transition-colors cursor-default border text-xs
+                  ${i === 0 || i === arr.length - 1
+                    ? 'bg-orange-500/30 text-orange-200 border-orange-400/40 font-extrabold'
+                    : i === arr.length - 2
+                    ? 'bg-purple-500/25 text-purple-200 border-purple-400/30 font-extrabold'
+                    : 'bg-yellow-400/15 hover:bg-yellow-400/30 text-yellow-100 border-yellow-400/20'
+                  }`}>
+                  {stop.name}
                 </span>
-                {i < arr.length - 1 && <span className="text-yellow-400/50 text-xs">›</span>}
               </span>
             ))}
           </motion.div>
@@ -250,7 +270,7 @@ export default function Home() {
       </section>
 
       {/* ── Highlights Section ── */}
-      <section className="py-10 bg-[#fdf6e3]">
+      {/* <section className="py-10 bg-[#fdf6e3]">
         <div className="max-w-6xl mx-auto px-4 md:px-8">
           <motion.div {...fadeUp()} className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 gap-4">
             <div>
@@ -301,7 +321,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ── Why Choose Us ── */}
       <section className="py-10 px-4 md:px-8 bg-[#fdf6e3]">

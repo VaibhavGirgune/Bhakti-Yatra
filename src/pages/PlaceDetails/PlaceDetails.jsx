@@ -5,7 +5,7 @@ import {
   ArrowLeft, Star, BookOpen, ScrollText,
   Lightbulb, MapPin, PlayCircle, Globe, ChevronRight
 } from 'lucide-react';
-import { tours } from '../data/data';
+import { tours } from '../../data/data';
 
 const SectionHeader = ({ icon: Icon, color, label }) => (
   <div className={`flex items-center gap-3 mb-5`}>

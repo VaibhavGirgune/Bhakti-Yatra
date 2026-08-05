@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { contactDetails } from "../data/data";
+import { contactDetails } from "../../data/data";
 import { Phone, MessageCircle } from "lucide-react";
 
 export default function Contact() {

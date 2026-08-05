@@ -1,13 +1,14 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import Yatra from './pages/Yatra';
-import YatraRoute from './pages/YatraRoute';
-import PlaceDetails from './pages/PlaceDetails';
-import Bus from './pages/Bus';
-import LiveLocation from './pages/LiveLocation';
-import Contact from './pages/Contact';
+import Navbar from './components/layout/Navbar';
+import Home from './pages/Home/Home';
+import Yatra from './pages/Yatra/Yatra';
+import YatraRoute from './pages/YatraRoute/YatraRoute';
+import PlaceDetails from './pages/PlaceDetails/PlaceDetails';
+import Bus from './pages/Bus/Bus';
+import LiveLocation from './pages/LiveLocation/LiveLocation';
+import Contact from './pages/Contact/Contact';
+import Gallery from './pages/Gallery/Gallery';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/bus" element={<Bus />} />
           <Route path="/location" element={<LiveLocation />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/gallery" element={<Gallery />} />
         </Routes>
       </main>
       

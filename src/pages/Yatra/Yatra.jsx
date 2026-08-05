@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { tours } from '../data/data';
+import { tours } from '../../data/data';
 
 // Show only Gujarat & Maharashtra yatra routes
 const sortedTours = tours.filter(t =>

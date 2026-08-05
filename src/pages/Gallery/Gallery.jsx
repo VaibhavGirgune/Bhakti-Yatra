@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { busGalleryImages, tourGalleryImages } from '../data/placesData.js';
+import { busGalleryImages, tourGalleryImages } from '../../data/placesData.js';
 
 const allImages = [...busGalleryImages, ...tourGalleryImages];
 
