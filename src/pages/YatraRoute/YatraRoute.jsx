@@ -4,21 +4,50 @@ import { motion } from 'framer-motion';
 // ─── Route data with verified GPS coordinates ───────────────────────────────
 // Coordinates sourced from Wikipedia, latlong.net, and official sources
 const ROUTE_STOPS = [
-  { name: 'राहुरी',                                   enName: 'Rahuri',                                        state: 'MH', lat: 19.3927, lng: 74.6488, icon: '🏠', desc: 'प्रारंभ बिंदू — श्री दत्त कृपा यात्रा' },
-  { name: 'त्र्यंबकेश्वर ज्योतिर्लिंग',              enName: 'Trimbakeshwar Jyotirlinga',                     state: 'MH', lat: 19.9326, lng: 73.5309, icon: '🛕', desc: '१२ ज्योतिर्लिंगांपैकी एक, गोदावरी उगमस्थान' },
-  { name: 'गरुडेश्वर (टेंबे स्वामी महाराज समाधी)',   enName: 'Garudeshwar (Tembe Swami Maharaj Samadhi)',     state: 'GJ', lat: 21.8900, lng: 73.6400, icon: '🙏', desc: 'नर्मदा तीरावरील टेंबे स्वामी समाधी स्थान' },
-  { name: 'स्टॅच्यू ऑफ युनिटी (गंगाद्वार)',          enName: 'Statue of Unity (Gangadwar)',                   state: 'GJ', lat: 21.8380, lng: 73.7191, icon: '🗿', desc: 'जगातील सर्वात उंच पुतळा, नर्मदा महाआरती' },
-  { name: 'कुबेरधाम',                                 enName: 'Kuberdham',                                     state: 'GJ', lat: 21.9701, lng: 73.4624, icon: '💰', desc: 'धन व समृद्धीचे देव कुबेर — ६८० पायऱ्या' },
-  { name: 'नीलकंठ धाम (स्वामीनारायण मंदिर, पोइचा)',  enName: 'Nilkanth Dham — Swaminarayan Mandir, Poicha',   state: 'GJ', lat: 21.9650, lng: 73.4550, icon: '🛕', desc: 'नर्मदेच्या काठावरील भव्य स्वामीनारायण मंदिर' },
-  { name: 'जुनागढ गिरनार स्वामीनारायण मंदिर',        enName: 'Junagadh Girnar — Swaminarayan Mandir',         state: 'GJ', lat: 21.5155, lng: 70.4564, icon: '🛕', desc: 'गिरनार पायथ्याशी BAPS मंदिर' },
-  { name: 'गिरनार परिक्रमा',                          enName: 'Girnar Parikrama',                              state: 'GJ', lat: 21.5100, lng: 70.5050, icon: '🚶', desc: '३६ किमी पायी परिक्रमा' },
-  { name: 'गिरनार पर्वत',                             enName: 'Girnar Parvat',                                 state: 'GJ', lat: 21.4950, lng: 70.5200, icon: '⛰️', desc: 'गुरु दत्तात्रेय शिखर — ९,९९९ पायऱ्या' },
-  { name: 'सोरटी सोमनाथ',                             enName: 'Sorati Somnath',                                state: 'GJ', lat: 20.8880, lng: 70.4014, icon: '🛕', desc: '१२ ज्योतिर्लिंगांपैकी पहिले' },
-  { name: 'बेट द्वारका',                              enName: 'Bet Dwarka',                                    state: 'GJ', lat: 22.4687, lng: 69.0698, icon: '⛵', desc: 'भगवान कृष्णाचे मूळ निवासस्थान' },
-  { name: 'द्वारका',                                  enName: 'Dwarka',                                        state: 'GJ', lat: 22.2394, lng: 68.9678, icon: '🛕', desc: 'चार धामांपैकी एक — द्वारकाधीश मंदिर' },
-  { name: 'जलाराम मंदिर (वीरपूर)',                    enName: 'Jalaram Mandir (Virpur)',                       state: 'GJ', lat: 22.2050, lng: 71.0795, icon: '🙏', desc: 'संत जलाराम बापांचे जन्मस्थान, अखंड भंडारा' },
-  { name: 'सप्तश्रृंगी वणी गड',                       enName: 'Saptashrungi Vani Gad',                         state: 'MH', lat: 20.6030, lng: 73.8230, icon: '⛰️', desc: 'साडेतीन शक्तिपीठांपैकी एक — शेवटचा थांबा' },
-  { name: 'राहुरी',                                   enName: 'Rahuri',                                        state: 'MH', lat: 19.3927, lng: 74.6488, icon: '🏠', desc: 'परतणे — यात्रा समाप्ती' },
+  // ── Start ──
+  { name: 'राहुरी',                                         enName: 'Rahuri',                                              state: 'MH', lat: 19.3927, lng: 74.6488, icon: '🏠', desc: 'प्रारंभ बिंदू — श्री दत्त कृपा यात्रा' },
+
+  // ── Maharashtra ──
+  { name: 'त्र्यंबकेश्वर ज्योतिर्लिंग',                  enName: 'Trimbakeshwar Jyotirlinga',                           state: 'MH', lat: 19.9335, lng: 73.5305, icon: '🛕', desc: '१२ ज्योतिर्लिंगांपैकी एक, गोदावरी उगमस्थान, त्रिदेव शिवलिंग' },
+
+  // ── Gujarat — Narmada belt (north) ──
+  { name: 'गरुडेश्वर (टेंबे स्वामी महाराज समाधी)',         enName: 'Garudeshwar — Tembe Swami Maharaj Samadhi',           state: 'GJ', lat: 21.8900, lng: 73.6400, icon: '🙏', desc: 'नर्मदा तीरावरील टेंबे स्वामी समाधी स्थान' },
+  { name: 'स्टॅच्यू ऑफ युनिटी (गंगाद्वार)',               enName: 'Statue of Unity (Gangadwar)',                         state: 'GJ', lat: 21.8380, lng: 73.7191, icon: '🗿', desc: 'जगातील सर्वात उंच पुतळा, नर्मदा महाआरती' },
+  { name: 'कुबेर भंडारी (कुबेरधाम)',                       enName: 'Kuber Bhandari (Kuberdham)',                          state: 'GJ', lat: 21.9701, lng: 73.4624, icon: '💰', desc: 'धन व समृद्धीचे देव कुबेर — ६८० पायऱ्या' },
+  { name: 'नीलकंठ धाम (स्वामीनारायण मंदिर, पोइचा)',       enName: 'Nilkanth Dham — Swaminarayan Mandir, Poicha',         state: 'GJ', lat: 21.9650, lng: 73.4550, icon: '🛕', desc: 'नर्मदेच्या काठावरील भव्य स्वामीनारायण मंदिर' },
+
+  // ── Gujarat — Girnar / Junagadh ──
+  { name: 'गिरनार (स्वामीनारायण मंदिर - B.A.P.S.)',       enName: 'Girnar — BAPS Swaminarayan Mandir',                  state: 'GJ', lat: 21.5155, lng: 70.4564, icon: '🛕', desc: 'गिरनार पायथ्याशी BAPS मंदिर — दर्शन' },
+  { name: 'गिरनार परिक्रमा (वीर फॉरेस्ट)',                enName: 'Girnar Parikrama — Veer Forest',                      state: 'GJ', lat: 21.5100, lng: 70.5050, icon: '🚶', desc: '३६ किमी पायी परिक्रमा — वीर जंगल' },
+  { name: 'गिरनार पर्वत (जटा शंकर)',                       enName: 'Girnar Parvat — Jata Shankar',                        state: 'GJ', lat: 21.4980, lng: 70.5180, icon: '🕉️', desc: 'गिरनार चढाईचे प्रवेशद्वार — जटाधारी शिव' },
+  { name: 'गिरनार पर्वत (अंबामाता मंदिर)',                enName: 'Girnar Parvat — Amba Mata Temple',                   state: 'GJ', lat: 21.4955, lng: 70.5210, icon: '🛕', desc: 'गुजरातचे प्रमुख शक्तिपीठ — अंबामाता' },
+  { name: 'गिरनार पर्वत (गोरखा शिखर)',                    enName: 'Girnar Parvat — Gorakh Shikhar',                     state: 'GJ', lat: 21.4940, lng: 70.5220, icon: '🧘', desc: 'नाथ संप्रदायाची तपोभूमी — गोरखनाथ पादुका' },
+  { name: 'गिरनार पर्वत (गुरु दत्तात्रेय शिखर)',          enName: 'Girnar Parvat — Guru Dattatreya Shikhar',            state: 'GJ', lat: 21.4930, lng: 70.5250, icon: '⛰️', desc: 'सर्वोच्च शिखर — दत्तात्रेय पादुका, ९,९९९ पायऱ्या' },
+
+  // ── Gujarat — Somnath ──
+  { name: 'सोरटी सोमनाथ',                                  enName: 'Sorati Somnath — Jyotirlinga',                        state: 'GJ', lat: 20.8880, lng: 70.4014, icon: '🛕', desc: '१२ ज्योतिर्लिंगांपैकी पहिले — भव्य मंदिर' },
+  { name: 'सोरटी सोमनाथ (त्रिवेणी संगम)',                 enName: 'Sorati Somnath — Triveni Sangam',                    state: 'GJ', lat: 20.8880, lng: 70.4010, icon: '🌊', desc: 'हिरण, कपिला, सरस्वती नद्यांचा पवित्र संगम' },
+  { name: 'सोरटी सोमनाथ (भालका तीर्थ)',                   enName: 'Sorati Somnath — Bhalka Tirth',                      state: 'GJ', lat: 20.9050, lng: 70.3900, icon: '🏹', desc: 'भगवान कृष्णाचे निर्वाण स्थान' },
+  { name: 'सोरटी सोमनाथ (गीता मंदिर)',                    enName: 'Sorati Somnath — Gita Mandir',                       state: 'GJ', lat: 20.8895, lng: 70.4025, icon: '📖', desc: 'संपूर्ण भगवद्गीता शिळांवर कोरलेली' },
+  { name: 'सोरटी सोमनाथ (लक्ष्मी नारायण मंदिर)',          enName: 'Sorati Somnath — Lakshmi Narayan Mandir',            state: 'GJ', lat: 20.8885, lng: 70.4010, icon: '🪷', desc: 'भगवान विष्णू व माता लक्ष्मी मंदिर' },
+  { name: 'सोरटी सोमनाथ (सूर्य मंदिर)',                   enName: 'Sorati Somnath — Surya Mandir',                      state: 'GJ', lat: 20.8875, lng: 70.4020, icon: '☀️', desc: 'प्राचीन सूर्यनारायण मंदिर' },
+  { name: 'सोरटी सोमनाथ (पंच पांडव गुफा)',                enName: 'Sorati Somnath — Panch Pandav Gufa',                 state: 'GJ', lat: 20.8870, lng: 70.4030, icon: '🕳️', desc: 'पांडवांची प्राचीन गुफा — महाभारत स्मृती' },
+  { name: 'सोरटी सोमनाथ (बाण गंगा)',                      enName: 'Sorati Somnath — Baan Ganga',                         state: 'GJ', lat: 20.8890, lng: 70.4005, icon: '💧', desc: 'अर्जुनाच्या बाणाने उत्पन्न झालेले पवित्र जल' },
+
+  // ── Gujarat — Dwarka coast ──
+  { name: 'नागेश्वर (ज्योतिर्लिंग)',                       enName: 'Nageshwar Jyotirlinga',                               state: 'GJ', lat: 22.3254, lng: 68.9571, icon: '🐍', desc: '१२ ज्योतिर्लिंगांपैकी एक — नागांचे ईश्वर' },
+  { name: 'बेट द्वारका',                                   enName: 'Bet Dwarka',                                          state: 'GJ', lat: 22.4687, lng: 69.0698, icon: '⛵', desc: 'भगवान कृष्णाचे मूळ निवासस्थान' },
+  { name: 'द्वारका',                                       enName: 'Dwarka',                                              state: 'GJ', lat: 22.2394, lng: 68.9678, icon: '🛕', desc: 'चार धामांपैकी एक — द्वारकाधीश मंदिर' },
+
+  // ── Gujarat — Saurashtra / South ──
+  { name: 'जलाराम मंदिर (वीरपूर)',                         enName: 'Jalaram Mandir (Virpur)',                             state: 'GJ', lat: 22.2050, lng: 71.0795, icon: '🙏', desc: 'संत जलाराम बापांचे जन्मस्थान, अखंड भंडारा' },
+  { name: 'उनाई माता मंदिर',                               enName: 'Unai Mata Mandir',                                    state: 'GJ', lat: 20.8300, lng: 73.0200, icon: '🌡️', desc: 'गुजरातचे शक्तिपीठ — नैसर्गिक उष्ण जलकुंड' },
+
+  // ── Back to Maharashtra ──
+  { name: 'सप्तश्रृंगी वणी गड',                            enName: 'Saptashrungi Vani Gad',                               state: 'MH', lat: 20.6030, lng: 73.8230, icon: '⛰️', desc: 'साडेतीन शक्तिपीठांपैकी एक — शेवटचा थांबा' },
+
+  // ── End ──
+  { name: 'राहुरी',                                         enName: 'Rahuri',                                              state: 'MH', lat: 19.3927, lng: 74.6488, icon: '🏠', desc: 'परतणे — यात्रा समाप्ती' },
 ];
 
 // ─── Haversine formula — straight-line km between two GPS points ─────────────
@@ -64,6 +93,18 @@ export default function YatraRoute() {
   const isStartEnd = (i) => i === 0 || i === ROUTE_STOPS.length - 1;
   const isLastPilgrimStop = (i) => i === ROUTE_STOPS.length - 2; // सप्तश्रृंगी
 
+  // Group label for section headers
+  const getSectionLabel = (stop, i) => {
+    if (i === 1) return '📍 महाराष्ट्र';
+    if (i === 3) return '📍 गुजरात — नर्मदा पट्टा';
+    if (i === 7) return '📍 गुजरात — गिरनार / जुनागढ';
+    if (i === 14) return '📍 गुजरात — सोमनाथ';
+    if (i === 21) return '📍 गुजरात — द्वारका तट';
+    if (i === 24) return '📍 गुजरात — सौराष्ट्र';
+    if (i === ROUTE_STOPS.length - 2) return '📍 महाराष्ट्र — परतणे';
+    return null;
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
@@ -102,10 +143,18 @@ export default function YatraRoute() {
             {stopsWithCum.map((stop, i) => {
               const style = REGION_STYLE[stop.state];
               const isEnd = isStartEnd(i);
+              const sectionLabel = getSectionLabel(stop, i);
 
               return (
+                <React.Fragment key={`${stop.name}-${i}`}>
+                  {/* Section header */}
+                  {sectionLabel && (
+                    <div className="flex items-center gap-2 py-2 pl-2">
+                      <span className="text-xs font-extrabold text-gray-400 uppercase tracking-widest">{sectionLabel}</span>
+                      <div className="flex-1 h-px bg-gray-200" />
+                    </div>
+                  )}
                 <motion.div
-                  key={`${stop.name}-${i}`}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -174,6 +223,7 @@ export default function YatraRoute() {
                     </div>
                   </div>
                 </motion.div>
+                </React.Fragment>
               );
             })}
           </div>

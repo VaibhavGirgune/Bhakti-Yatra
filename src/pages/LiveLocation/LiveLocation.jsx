@@ -31,38 +31,62 @@ const STATE_CFG = {
   'महाराष्ट्र (विशेष यात्रा)': { color: '#059669', light: '#d1fae5', label: 'MH' },
 };
 
-// Optimised route order: Rahuri → Trimbakeshwar → Gujarat → Saptashrungi → Rahuri
+// Optimised route order: Rahuri → exact user-provided sequence
 const ROUTE_ORDER = [
   'त्र्यंबकेश्वर ज्योतिर्लिंग',
   'गरुडेश्वर (टेंबे स्वामी महाराज समाधी)',
   'स्टॅच्यू ऑफ युनिटी (गंगाद्वार)',
-  'कुबेरधाम',
   'नीलकंठ धाम (स्वामीनारायण मंदिर, पोइचा)',
-  'जुनागढ गिरनार स्वामीनारायण मंदिर',
-  'गिरनार परिक्रमा',
-  'गिरनार पर्वत',
+  'कुबेरधाम',
+  'गिरनार (स्वामीनारायण मंदिर - B.A.P.S.)',
+  'गिरनार परिक्रमा (वीर फॉरेस्ट)',
+  'गिरनार पर्वत (जटा शंकर)',
+  'गिरनार पर्वत (अंबामाता मंदिर)',
+  'गिरनार पर्वत (गोरखा शिखर)',
+  'गिरनार पर्वत (गुरु दत्तात्रेय शिखर)',
   'सोरटी सोमनाथ',
-  'बेट द्वारका',
+  'सोरटी सोमनाथ (त्रिवेणी संगम)',
+  'सोरटी सोमनाथ (भालका तीर्थ)',
+  'सोरटी सोमनाथ (गीता मंदिर)',
+  'सोरटी सोमनाथ (लक्ष्मी नारायण मंदिर)',
+  'सोरटी सोमनाथ (सूर्य मंदिर)',
+  'सोरटी सोमनाथ (पंच पांडव गुफा)',
+  'सोरटी सोमनाथ (बाण गंगा)',
+  'नागेश्वर (ज्योतिर्लिंग)',
   'द्वारका',
+  'बेट द्वारका',
   'जलाराम मंदिर (वीरपूर)',
+  'उनाई माता मंदिर',
   'सप्तश्रृंगी वणी गड',
 ];
 
-// Verified road distances (km) — sourced from Rome2Rio, Google Maps & official sources
+// Exact road distances (km) as provided by user
 const DISTANCES = {
   'राहुरी→त्र्यंबकेश्वर ज्योतिर्लिंग': 147,
   'त्र्यंबकेश्वर ज्योतिर्लिंग→गरुडेश्वर (टेंबे स्वामी महाराज समाधी)': 298,
   'गरुडेश्वर (टेंबे स्वामी महाराज समाधी)→स्टॅच्यू ऑफ युनिटी (गंगाद्वार)': 6,
-  'स्टॅच्यू ऑफ युनिटी (गंगाद्वार)→कुबेरधाम': 113,
-  'कुबेरधाम→नीलकंठ धाम (स्वामीनारायण मंदिर, पोइचा)': 3,
-  'नीलकंठ धाम (स्वामीनारायण मंदिर, पोइचा)→जुनागढ गिरनार स्वामीनारायण मंदिर': 240,
-  'जुनागढ गिरनार स्वामीनारायण मंदिर→गिरनार परिक्रमा': 5,
-  'गिरनार परिक्रमा→गिरनार पर्वत': 2,
-  'गिरनार पर्वत→सोरटी सोमनाथ': 102,
-  'सोरटी सोमनाथ→बेट द्वारका': 264,
-  'बेट द्वारका→द्वारका': 35,
-  'द्वारका→जलाराम मंदिर (वीरपूर)': 220,
-  'जलाराम मंदिर (वीरपूर)→सप्तश्रृंगी वणी गड': 340,
+  'स्टॅच्यू ऑफ युनिटी (गंगाद्वार)→नीलकंठ धाम (स्वामीनारायण मंदिर, पोइचा)': 3,
+  'नीलकंठ धाम (स्वामीनारायण मंदिर, पोइचा)→कुबेरधाम': 3,
+  'कुबेरधाम→गिरनार (स्वामीनारायण मंदिर - B.A.P.S.)': 240,
+  'गिरनार (स्वामीनारायण मंदिर - B.A.P.S.)→गिरनार परिक्रमा (वीर फॉरेस्ट)': 5,
+  'गिरनार परिक्रमा (वीर फॉरेस्ट)→गिरनार पर्वत (जटा शंकर)': 2,
+  'गिरनार पर्वत (जटा शंकर)→गिरनार पर्वत (अंबामाता मंदिर)': 1,
+  'गिरनार पर्वत (अंबामाता मंदिर)→गिरनार पर्वत (गोरखा शिखर)': 1,
+  'गिरनार पर्वत (गोरखा शिखर)→गिरनार पर्वत (गुरु दत्तात्रेय शिखर)': 1,
+  'गिरनार पर्वत (गुरु दत्तात्रेय शिखर)→सोरटी सोमनाथ': 102,
+  'सोरटी सोमनाथ→सोरटी सोमनाथ (त्रिवेणी संगम)': 1,
+  'सोरटी सोमनाथ (त्रिवेणी संगम)→सोरटी सोमनाथ (भालका तीर्थ)': 2,
+  'सोरटी सोमनाथ (भालका तीर्थ)→सोरटी सोमनाथ (गीता मंदिर)': 2,
+  'सोरटी सोमनाथ (गीता मंदिर)→सोरटी सोमनाथ (लक्ष्मी नारायण मंदिर)': 1,
+  'सोरटी सोमनाथ (लक्ष्मी नारायण मंदिर)→सोरटी सोमनाथ (सूर्य मंदिर)': 1,
+  'सोरटी सोमनाथ (सूर्य मंदिर)→सोरटी सोमनाथ (पंच पांडव गुफा)': 2,
+  'सोरटी सोमनाथ (पंच पांडव गुफा)→सोरटी सोमनाथ (बाण गंगा)': 2,
+  'सोरटी सोमनाथ (बाण गंगा)→नागेश्वर (ज्योतिर्लिंग)': 264,
+  'नागेश्वर (ज्योतिर्लिंग)→द्वारका': 18,
+  'द्वारका→बेट द्वारका': 35,
+  'बेट द्वारका→जलाराम मंदिर (वीरपूर)': 220,
+  'जलाराम मंदिर (वीरपूर)→उनाई माता मंदिर': 180,
+  'उनाई माता मंदिर→सप्तश्रृंगी वणी गड': 130,
   'सप्तश्रृंगी वणी गड→राहुरी': 183,
 };
 
@@ -126,8 +150,10 @@ function homeIcon() {
 function FitBounds({ positions }) {
   const map = useMap();
   useEffect(() => {
-    if (positions.length > 1)
-      map.fitBounds(L.latLngBounds(positions), { padding: [60, 60] });
+    if (positions.length > 1) {
+      // Fit to Gujarat+Maharashtra bounding box for a clean initial view
+      map.fitBounds([[19.0, 68.5], [22.5, 77.0]], { padding: [40, 40] });
+    }
   }, []);
   return null;
 }
@@ -201,10 +227,13 @@ export default function LiveLocation() {
       <AnimatePresence>
         {panelOpen && (
           <motion.aside
-            initial={{ x: -360 }} animate={{ x: 0 }} exit={{ x: -360 }}
+            initial={{ x: -380 }} animate={{ x: 0 }} exit={{ x: -380 }}
             transition={{ type: 'spring', stiffness: 280, damping: 28 }}
-            className="absolute left-0 top-0 h-full w-[340px] bg-white z-[1000] flex flex-col shadow-2xl"
-            style={{ borderRight: '1px solid #f1f5f9' }}
+            className="absolute left-0 top-0 h-full z-[1000] flex flex-col shadow-2xl bg-white"
+            style={{
+              width: 'min(340px, 100vw)',
+              borderRight: '1px solid #f1f5f9',
+            }}
           >
             {/* ── Header ── */}
             <div className="bg-gradient-to-br from-orange-500 via-orange-500 to-amber-400 px-5 pt-5 pb-4">
@@ -397,7 +426,7 @@ export default function LiveLocation() {
               {[
                 { icon: <MapPin size={14} />, label: 'तीर्थस्थळे', value: `${ordered.length}+` },
                 { icon: <Map size={14} />,    label: 'राज्ये',      value: '2' },
-                { icon: <Bus size={14} />,    label: 'किमी',        value: '~1,958' },
+                { icon: <Bus size={14} />,    label: 'किमी',        value: '~2,400' },
               ].map(s => (
                 <div key={s.label} className="py-3 text-center">
                   <div className="flex items-center justify-center gap-1 text-orange-500 mb-0.5">{s.icon}</div>
@@ -412,7 +441,7 @@ export default function LiveLocation() {
 
       {/* ══════════════ MAP ══════════════ */}
       <div className="flex-1 relative">
-        <MapContainer center={[23, 79]} zoom={5} zoomControl={false}
+        <MapContainer center={[22.5, 73]} zoom={6} zoomControl={false}
           style={{ height: '100%', width: '100%', zIndex: 0 }}>
 
           <TileLayer url={MAP_TILES['standard']}
@@ -478,8 +507,8 @@ export default function LiveLocation() {
 
 
         {/* ── Route strip ── */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-[400] bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg px-5 py-2.5 border border-gray-100 flex items-center gap-2 text-xs text-gray-600 font-medium whitespace-nowrap max-w-[90vw] overflow-x-auto"
-          style={{ scrollbarWidth: 'none' }}>
+        <div className="absolute bottom-4 left-4 right-4 z-[400] bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg px-4 py-2.5 border border-gray-100 flex items-center gap-1.5 text-xs text-gray-600 font-medium overflow-x-auto"
+          style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
           <button onClick={() => setFlyTarget(RAHURI)} className="flex items-center gap-1 hover:text-orange-600 transition-colors shrink-0">
             <Home size={12} className="text-orange-500" />
             <span className="text-orange-600 font-bold">राहुरी</span>
@@ -490,11 +519,11 @@ export default function LiveLocation() {
             const dist = DISTANCES[distKey];
             return (
               <span key={place.name} className="flex items-center gap-1 shrink-0">
-                <ChevronRight size={11} className="text-gray-300" />
-                {dist && <span className="text-gray-400 text-[10px]">{dist}km</span>}
-                <ChevronRight size={11} className="text-gray-300" />
+                <ChevronRight size={10} className="text-gray-300" />
+                {dist && <span className="text-gray-400 text-[9px]">{dist}km</span>}
+                <ChevronRight size={10} className="text-gray-300" />
                 <button onClick={() => handleSelect(place)}
-                  className="font-bold hover:underline transition-colors"
+                  className="font-bold hover:underline transition-colors text-[11px]"
                   style={{ color: cfg.color }}>
                   {place.name}
                 </button>
@@ -502,9 +531,9 @@ export default function LiveLocation() {
             );
           })}
           <span className="flex items-center gap-1 shrink-0">
-            <ChevronRight size={11} className="text-gray-300" />
-            <span className="text-gray-400 text-[10px]">{DISTANCES['सप्तश्रृंगी वणी गड→राहुरी']}km</span>
-            <ChevronRight size={11} className="text-gray-300" />
+            <ChevronRight size={10} className="text-gray-300" />
+            <span className="text-gray-400 text-[9px]">{DISTANCES['सप्तश्रृंगी वणी गड→राहुरी']}km</span>
+            <ChevronRight size={10} className="text-gray-300" />
             <Home size={12} className="text-orange-500" />
             <span className="text-orange-600 font-bold">राहुरी</span>
           </span>

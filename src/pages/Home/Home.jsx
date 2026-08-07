@@ -24,7 +24,7 @@ const featuredPlaces = [
 
 const stats = [
   { value: "२", label: "पवित्र राज्ये", Icon: Map },
-  { value: "13+", label: "तीर्थक्षेत्रे", Icon: Landmark },
+  { value: "27+", label: "तीर्थक्षेत्रे", Icon: Landmark },
   { value: "१००%", label: "सुरक्षित प्रवास", Icon: ShieldCheck },
 ];
 
@@ -103,7 +103,7 @@ export default function Home() {
 
           <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto leading-relaxed">
             पवित्र तीर्थक्षेत्रांची सुरक्षित, आरामदायी आणि संस्मरणीय यात्रा —
-            <span className="text-orange-300 font-extrabold"> गुजरात-महाराष्ट्र, 13+ ठिकाणे</span>
+            <span className="text-orange-300 font-extrabold"> गुजरात-महाराष्ट्र, 27+ ठिकाणे</span>
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -159,7 +159,7 @@ export default function Home() {
               आमचा पवित्र यात्रा मार्ग
             </h2>
             <p className="text-[#a06c08] max-w-xl mx-auto text-base font-semibold">
-              गुजरात व महाराष्ट्र राज्यांमधील 13+ पवित्र तीर्थक्षेत्रांना एकाच यात्रेत भेट द्या
+              गुजरात व महाराष्ट्र राज्यांमधील 27+ पवित्र तीर्थक्षेत्रांना एकाच यात्रेत भेट द्या
             </p>
             <div className="spiritual-divider w-48 mt-4 mx-auto" />
           </motion.div>
@@ -167,9 +167,9 @@ export default function Home() {
           {/* KM Stats */}
           <motion.div {...fadeUp(0.1)} className="flex flex-wrap justify-center gap-4 mb-10">
             {[
-              { label: 'एकूण अंतर', value: '~1,958 किमी', icon: '🛣️' },
+              { label: 'एकूण अंतर', value: '~2,400 किमी', icon: '🛣️' },
               { label: 'राज्ये', value: '२', icon: '🗺️' },
-              { label: 'तीर्थक्षेत्रे', value: '13+', icon: '🛕' },
+              { label: 'तीर्थक्षेत्रे', value: '27+', icon: '🛕' },
               { label: 'अंदाजे दिवस', value: '12-15', icon: '📅' },
             ].map(stat => (
               <div key={stat.label} className="flex items-center gap-3 bg-yellow-50 border border-yellow-300 rounded-2xl px-5 py-3 shadow-sm">
@@ -226,7 +226,7 @@ export default function Home() {
               🛕 संपूर्ण यात्रा मार्ग
             </span>
             <h3 className="text-yellow-100 font-extrabold text-xl">राहुरी पासून संपूर्ण यात्रा मार्ग</h3>
-            <p className="text-yellow-200/70 text-sm mt-1">एकूण ~1,958 किमी • 13 पवित्र ठिकाणे</p>
+            <p className="text-yellow-200/70 text-sm mt-1">एकूण ~2,400 किमी • 27+ पवित्र ठिकाणे</p>
           </motion.div>
           <motion.div {...fadeUp(0.1)} className="flex flex-wrap justify-center gap-2 text-sm font-bold">
             {[
@@ -234,16 +234,28 @@ export default function Home() {
               { name: 'त्र्यंबकेश्वर ज्योतिर्लिंग', km: 147 },
               { name: 'गरुडेश्वर (टेंबे स्वामी महाराज समाधी)', km: 298 },
               { name: 'स्टॅच्यू ऑफ युनिटी (गंगाद्वार)', km: 6 },
-              { name: 'कुबेरधाम', km: 113 },
               { name: 'नीलकंठ धाम (स्वामीनारायण मंदिर, पोइचा)', km: 3 },
-              { name: 'जुनागढ गिरनार स्वामीनारायण मंदिर', km: 240 },
-              { name: 'गिरनार परिक्रमा', km: 5 },
-              { name: 'गिरनार पर्वत', km: 2 },
+              { name: 'कुबेर भंडारी (कुबेरधाम)', km: 3 },
+              { name: 'गिरनार (स्वामीनारायण मंदिर - B.A.P.S.)', km: 240 },
+              { name: 'गिरनार परिक्रमा (वीर फॉरेस्ट)', km: 5 },
+              { name: 'गिरनार पर्वत (जटा शंकर)', km: 2 },
+              { name: 'गिरनार पर्वत (अंबामाता मंदिर)', km: 1 },
+              { name: 'गिरनार पर्वत (गोरखा शिखर)', km: 1 },
+              { name: 'गिरनार पर्वत (गुरु दत्तात्रेय शिखर)', km: 1 },
               { name: 'सोरटी सोमनाथ', km: 102 },
-              { name: 'बेट द्वारका', km: 264 },
-              { name: 'द्वारका', km: 35 },
+              { name: 'सोरटी सोमनाथ (त्रिवेणी संगम)', km: 1 },
+              { name: 'सोरटी सोमनाथ (भालका तीर्थ)', km: 2 },
+              { name: 'सोरटी सोमनाथ (गीता मंदिर)', km: 2 },
+              { name: 'सोरटी सोमनाथ (लक्ष्मी नारायण मंदिर)', km: 1 },
+              { name: 'सोरटी सोमनाथ (सूर्य मंदिर)', km: 1 },
+              { name: 'सोरटी सोमनाथ (पंच पांडव गुफा)', km: 2 },
+              { name: 'सोरटी सोमनाथ (बाण गंगा)', km: 2 },
+              { name: 'नागेश्वर (ज्योतिर्लिंग)', km: 264 },
+              { name: 'द्वारका', km: 18 },
+              { name: 'बेट द्वारका', km: 35 },
               { name: 'जलाराम मंदिर (वीरपूर)', km: 220 },
-              { name: 'सप्तश्रृंगी वणी गड', km: 340 },
+              { name: 'उनाई माता मंदिर', km: 180 },
+              { name: 'सप्तश्रृंगी वणी गड', km: 130 },
               { name: 'राहुरी', km: 183 },
             ].map((stop, i, arr) => (
               <span key={i} className="flex items-center gap-1">
