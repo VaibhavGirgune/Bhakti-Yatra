@@ -27,13 +27,28 @@ function App() {
         </Routes>
       </main>
       
-      {/* Simple Footer */}
-      <footer className="bg-gray-900 text-white py-6 text-center">
-        <p className="text-gray-400">© {new Date().getFullYear()} श्री दत्त कृपा यात्रा. सर्व हक्क सुरक्षित.</p>
-        <p className="text-gray-600 text-xs mt-1">
-          Designed & Developed by{' '}
-          <span className="text-gray-400 font-semibold">Vaibhav Girgune</span>
-        </p>
+      {/* Footer */}
+      <footer className="bg-[#0f172a] border-t border-white/5">
+        <div className="max-w-5xl mx-auto px-5 py-8 flex flex-wrap items-center justify-between gap-y-3 gap-x-6">
+
+          <span className="text-orange-400 font-bold text-xs">🛕 श्री दत्त कृपा यात्रा</span>
+
+          <div className="flex items-center gap-4 text-xs text-gray-400">
+            <a href="tel:7058353049" className="hover:text-orange-400 transition-colors font-semibold">📞 7058353049</a>
+            <span className="text-gray-700">·</span>
+            <span>📍 आझाद चौक, राहुरी</span>
+          </div>
+
+          <p className="text-[10px] text-gray-600 text-right">
+            © {new Date().getFullYear()} सर्व हक्क सुरक्षित
+            <span className="mx-1.5 text-gray-700">·</span>
+            अशी वेबसाइट हवी?{' '}
+            <a href="tel:7058353049" className="text-orange-500 hover:text-orange-400 font-semibold transition-colors">संपर्क करा</a>
+            <span className="mx-1.5 text-gray-700">·</span>
+            Dev: <span className="text-gray-500">Vaibhav Girgune</span>
+          </p>
+
+        </div>
       </footer>
     </div>
   );
