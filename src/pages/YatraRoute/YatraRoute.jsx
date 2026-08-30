@@ -18,7 +18,7 @@ const ROUTE_STOPS = [
 
   // ── Gujarat — Girnar / Junagadh ──
   { name: 'गिरनार (स्वामीनारायण मंदिर - B.A.P.S.)',       enName: 'Girnar — BAPS Swaminarayan Mandir',                  state: 'GJ', lat: 21.5155, lng: 70.4564, icon: '🛕', desc: 'गिरनार पायथ्याशी BAPS मंदिर — दर्शन' },
-  { name: 'गिरनार परिक्रमा (वीर फॉरेस्ट)',                enName: 'Girnar Parikrama — Veer Forest',                      state: 'GJ', lat: 21.5100, lng: 70.5050, icon: '🚶', desc: '३६ किमी पायी परिक्रमा — वीर जंगल' },
+  { name: 'गिरनार परिक्रमा (गिर फॉरेस्ट)',                enName: 'Girnar Parikrama — Gir Forest',                       state: 'GJ', lat: 21.5100, lng: 70.5050, icon: '🚶', desc: '३६ किमी पायी परिक्रमा — गिर जंगल' },
   { name: 'गिरनार पर्वत (जटा शंकर)',                       enName: 'Girnar Parvat — Jata Shankar',                        state: 'GJ', lat: 21.4980, lng: 70.5180, icon: '🕉️', desc: 'गिरनार चढाईचे प्रवेशद्वार — जटाधारी शिव' },
   { name: 'गिरनार पर्वत (अंबामाता मंदिर)',                enName: 'Girnar Parvat — Amba Mata Temple',                   state: 'GJ', lat: 21.4955, lng: 70.5210, icon: '🛕', desc: 'गुजरातचे प्रमुख शक्तिपीठ — अंबामाता' },
   { name: 'गिरनार पर्वत (गोरखा शिखर)',                    enName: 'Girnar Parvat — Gorakh Shikhar',                     state: 'GJ', lat: 21.4940, lng: 70.5220, icon: '🧘', desc: 'नाथ संप्रदायाची तपोभूमी — गोरखनाथ पादुका' },
@@ -38,6 +38,8 @@ const ROUTE_STOPS = [
   { name: 'नागेश्वर (ज्योतिर्लिंग)',                       enName: 'Nageshwar Jyotirlinga',                               state: 'GJ', lat: 22.3254, lng: 68.9571, icon: '🐍', desc: '१२ ज्योतिर्लिंगांपैकी एक — नागांचे ईश्वर' },
   { name: 'बेट द्वारका',                                   enName: 'Bet Dwarka',                                          state: 'GJ', lat: 22.4687, lng: 69.0698, icon: '⛵', desc: 'भगवान कृष्णाचे मूळ निवासस्थान' },
   { name: 'द्वारका',                                       enName: 'Dwarka',                                              state: 'GJ', lat: 22.2394, lng: 68.9678, icon: '🛕', desc: 'चार धामांपैकी एक — द्वारकाधीश मंदिर' },
+  { name: 'द्वारका (गोपी तलाव)',                           enName: 'Dwarka — Gopi Talav',                                 state: 'GJ', lat: 22.3500, lng: 68.9800, icon: '💛', desc: 'गोपीचंदन माती — कृष्ण-गोपी वियोगाचे पवित्र तलाव' },
+  { name: 'द्वारका (रुक्मिणी देवी मंदिर)',               enName: 'Dwarka — Rukmini Devi Temple',                        state: 'GJ', lat: 22.2450, lng: 68.9620, icon: '🌸', desc: 'कृष्णाच्या प्रमुख पत्नी रुक्मिणीदेवींचे प्राचीन मंदिर' },
 
   // ── Gujarat — Saurashtra / South ──
   { name: 'जलाराम मंदिर (वीरपूर)',                         enName: 'Jalaram Mandir (Virpur)',                             state: 'GJ', lat: 22.2050, lng: 71.0795, icon: '🙏', desc: 'संत जलाराम बापांचे जन्मस्थान, अखंड भंडारा' },
