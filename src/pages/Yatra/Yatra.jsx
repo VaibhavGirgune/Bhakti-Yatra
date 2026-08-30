@@ -14,9 +14,6 @@ export default function Yatra() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-10">
           <h1 className="text-4xl md:text-5xl font-extrabold text-orange-600 mb-4">आमची धार्मिक यात्रा</h1>
-          <p className="text-lg font-semibold text-gray-600 max-w-2xl mx-auto">
-            मध्यप्रदेश, उत्तरप्रदेश, नेपाळ, बिहार, गुजरात आणि महाराष्ट्र राज्यांमधील पवित्र स्थळांची नयनरम्य सफर.
-          </p>
         </div>
 
         <div className="space-y-10">
